@@ -1,0 +1,69 @@
+header {
+    background-color: grey;
+    margin-top: 20px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+body {
+    background-image: url('./blogbg.jpg');
+    background-repeat: no-repeat;
+}
+
+label {
+    margin-bottom: 10px;
+}
+
+h2 {
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 0px;
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+div,
+h1 {
+    width: 60%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 5px auto;
+}
+
+#cont {
+    width: 800px;
+    height: 150px;
+}
+
+#title {
+    width: 200px;
+}
+
+#submit {
+    line-height: 20px;
+    width: 100px;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    width: 50px;
+    margin-inline-start: 20%;
+}
+
+#postheading {
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-bottom: 0;
+}
+
+#post {
+    margin-top: 3px;
+    margin-left: 10px;
+}
+
+.comment {
+    margin-top: 10px;
+    border: 1px solid;
+}

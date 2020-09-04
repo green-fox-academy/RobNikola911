@@ -1,0 +1,109 @@
+body {
+  font-family: 'Courier New', Courier, monospace;
+  background-image: url(./assets/background.png);
+  text-align: justify;
+}
+  #nav {
+    color: #FF0099;
+    font-size: 20px;
+    height: 60px;
+    margin: auto;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration-line: underline;
+    text-decoration-style: solid;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10px;
+  }
+  .nav {
+    width: 40%;
+    padding-left: 200px;
+    scroll-padding-right: 100px;
+  }
+  img {
+    padding-left: 20px;
+  }
+  #rob {
+    color: rgb(0, 0, 0);
+    font-size: 60px;
+    margin: 100px 0px 30px 100px;
+    font-weight: bold;
+  }
+  #job {
+    color: #FF0099;
+    font-size: 30px;
+    margin: 15px 0px 40px 30px;
+  }
+  .box-1 {
+    line-height: 30px;
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+  }
+  .separator {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 50px 0 30px 0;
+  }
+  .wiki {
+    width: 120px;
+    margin: 0 auto;
+  }
+  p {
+    line-height: 150%;
+    color: #000000;
+    font-size: 20px;
+    margin-right: 15px;
+    padding: 0px 140px 0px 90px;
+  }
+
+  h2 {
+    width: 100%;
+    font-size: 35px;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  h3 {
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding: 0px 140px 0px 90px;
+  }
+  a {
+    color: #FF0099;
+    text-decoration: none;
+    transition: transform 0.5s ease-out;
+  }
+  a:visited {
+    color: #07d6ff;
+  }
+  a:hover {
+    color: #c89666;
+    transform: translateY(8px);
+  }
+  .contact-links {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 40px;
+  }
+  
+  .contact-details {
+    font-size: 30px;
+    text-shadow: 2px 2px 1px #1f1f1f;
+  }
+  
+  footer {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+  }

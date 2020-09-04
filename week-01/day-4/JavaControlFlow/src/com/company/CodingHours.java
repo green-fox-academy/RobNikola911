@@ -1,0 +1,23 @@
+package com.company;
+
+public class CodingHours {
+    public static void main(String[] args) {
+        int weeks = 17;
+        int daily = 6;
+
+        System.out.println((weeks * 5) * daily);
+
+        float avgHrsPerWeek = 52;
+        float codeHrsPerWeek = 30;
+        System.out.println((codeHrsPerWeek / avgHrsPerWeek * 100) + "%");
+
+        // An average Green Fox attendee codes 6 hours daily
+        // The semester is 17 weeks long
+        //
+        // Print how many hours is spent with coding in a semester by an attendee,
+        // if the attendee only codes on workdays.
+        //
+        // Print the percentage of the coding hours in the semester if the average
+        // work hours weekly is 52
+    }
+}
