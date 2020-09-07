@@ -7,8 +7,8 @@ public class FunctionExercisesDoubling {
     }
 
     public static int doubling(int n1) {
-        int doubling = n1 * 2;
-        return doubling;
+        int result = n1 * 2;
+        return result;
     }
 }
 
