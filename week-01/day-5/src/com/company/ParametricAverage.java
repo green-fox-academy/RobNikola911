@@ -1,5 +1,6 @@
 package com.company;
 
+import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class ParametricAverage {
@@ -8,7 +9,7 @@ public class ParametricAverage {
         System.out.println("Type in how many numbers you want to compare please: ");
         int times = scanner.nextInt();
         int sum = 0;
-        int avr = 0;
+        double avr = 0;
         int inputNumbers = 0;
         System.out.println("Your numbers: ");
         for (int numberOfTimes = 0; numberOfTimes < times; numberOfTimes++) {
@@ -17,8 +18,9 @@ public class ParametricAverage {
                 sum = sum + inputNumbers;
                 avr = sum / times;
             }
-            System.out.println(sum);
-            System.out.println(avr);
+            DecimalFormat format = new DecimalFormat("0.0");
+            System.out.println("The sum of your numbers: " + sum);
+            System.out.println("The average of your numbers: " + format.format(avr));
         }
     }
 }
