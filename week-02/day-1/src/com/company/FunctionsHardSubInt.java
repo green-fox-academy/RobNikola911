@@ -1,24 +1,26 @@
 package com.company;
 
-import java.util.Arrays;
-
 public class FunctionsHardSubInt {
     public static void main(String[] args) {
-        int[] numbers = {1, 11, 34, 52, 6};
-        int givenNumber = 6;
-        System.out.println(Arrays.toString(subInt(givenNumber, numbers)));
+        int[] arr = new int[]{1, 11, 34, 52, 61};
+        int findableInt = 1;
+        getIndexes(arr, findableInt);
     }
 
-    public static int subInt(int[] arr, int value) {
-        int result = 0;
+    public static void getIndexes(int[] arr, int findable) {
+        String findableStr = Integer.toString(findable);
+        System.out.print("[ ");
         for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i] == value) {
-                result = i;
-                break;
+//            61 => "61"
+            String tmp = Integer.toString(arr[i]);
+            if (tmp.contains(findableStr)) {
+                System.out.print(i);
+                if (i < arr.length - 1) {
+                    System.out.print(", ");
+                }
             }
         }
-        return result;
+        System.out.print(" ]");
     }
 }
 
