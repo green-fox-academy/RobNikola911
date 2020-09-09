@@ -17,11 +17,11 @@ public class WriteMultipleLinesPractice {
 
     private static void getManipulate(String path, String word, int lines) {
         try {
-            FileWriter myFile = new FileWriter("my-file.txt");
+            FileWriter myFile = new FileWriter(path, false);
             for (int index = 0; index < lines; index++) {
-                Path filePath = Paths.get(path);
                 myFile.write(word + "\n");
             }
+            myFile.close();
         } catch (IOException e) {
             System.out.println("Unable to write file: my-file.txt");
         }
