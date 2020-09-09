@@ -7,16 +7,21 @@ public class ExceptionDivideByZero {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please add your number to divide 10: ");
         int divisor = scanner.nextInt();
-        System.out.println("The result is: " + func(divisor));
+//        System.out.println("The result is: " + func(divisor));
+        try {
+            System.out.println("The result is: " + func(divisor));
+        } catch (IllegalArgumentException e) {
+            System.out.println("fail");
+        }
     }
 
-    private static Integer func(int divisor) {
-        int result = 10;
+    private static int func(int divisor) {
+        int result = 0;
         try {
-            result = result / divisor;
+            result = 10 / divisor;
 
         } catch (ArithmeticException e) {
-            System.out.println("fail");
+            throw new IllegalArgumentException(e);
         }
         return result;
     }
