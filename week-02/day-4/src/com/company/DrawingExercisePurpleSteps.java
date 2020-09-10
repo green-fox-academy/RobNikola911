@@ -1,31 +1,24 @@
 package com.company;
 
-
 import javax.swing.*;
 
 import java.awt.*;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class DrawingExercisePositionSquare {
-
+public class DrawingExercisePurpleSteps {
     public static void mainDraw(Graphics graphics) {
         int x = 0;
         int y = 0;
-
-        drawSquare(x, y, graphics);
-
-        // create a function that draws one square and takes 3 parameters:
-        // the x and y coordinates of the square's top left corner and the graphics
-        // and draws a 50x50 square from that point.
-        // draw 3 squares with that function.
-        // avoid code duplication.
+        getSquares(x, y, graphics);
     }
 
-    private static void drawSquare(int x, int y, Graphics graphics) {
-        for (int i = 60; i <= 180; i += 60) {
-            graphics.setColor((new Color(i, i, i)));
-            graphics.fillRect(i + x, i + y, 50, 50);
+    private static void getSquares(int x, int y, Graphics graphics) {
+        for (int i = 10; i < WIDTH / 3 * 2; i += 10) {
+            graphics.drawRect(i + x - 1, i + y - 1, 11, 11);
+            graphics.setColor(new Color(172, 57, 172));
+            graphics.fillRect(i + x, i + y, 10, 10);
+
         }
     }
 
@@ -51,5 +44,4 @@ public class DrawingExercisePositionSquare {
             mainDraw(graphics);
         }
     }
-
 }
