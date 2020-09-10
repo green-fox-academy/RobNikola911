@@ -6,7 +6,7 @@ import java.awt.*;
 
 import static javax.swing.JFrame.EXIT_ON_CLOSE;
 
-public class DrawingExercisePurpleSteps {
+public class DrawingExercisePurple3D {
     public static void mainDraw(Graphics graphics) {
         int x = 0;
         int y = 0;
@@ -14,13 +14,25 @@ public class DrawingExercisePurpleSteps {
     }
 
     private static void getSquares(int x, int y, Graphics graphics) {
-        for (int i = 10; i < WIDTH / 3 * 2; i += 10) {
+        int size = 10;
+        int pos = 10;
+        for (int i = 1; i < 7; i += 1) {
+//            graphics.drawRect(i + x - 1, i + y - 1, 11, 11);
             graphics.setColor(new Color(172, 57, 172));
-            graphics.fillRect(i + x, i + y, 10, 10);
+            graphics.fillRect(pos, pos, size, size);
             graphics.setColor(Color.black);
-            graphics.drawRect(i + x, i + y, 10, 10);
-
+            graphics.drawRect(pos, pos, size, size);
+            pos += size;
+            size += 10;
         }
+    }
+
+    private static int getFactorial(int number) {
+        int i, fact = 1;
+        for (i = 1; i <= number; i++) {
+            fact = fact * i;
+        }
+        return fact;
     }
 
     // Don't touch the code below
