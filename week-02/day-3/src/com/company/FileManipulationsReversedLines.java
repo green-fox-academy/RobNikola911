@@ -7,13 +7,16 @@ import java.io.FileWriter;
 
 public class FileManipulationsReversedLines {
     public static void main(String[] args) {
-        new FileManipulationsReversedLines().replace();
-    }
-
-    public void replace() {
         String oldFileName = "reversed-lines.txt";
         String tmpFileName = "nonreversed-lines.txt";
+        if (replace(oldFileName, tmpFileName)) {
+            System.out.println("Reverse was successful!");
+        } else {
+            System.out.println("Reverse was unsuccessful!");
+        }
+    }
 
+    private static boolean replace(String oldFileName, String tmpFileName) {
         BufferedReader br = null;
         BufferedWriter bw = null;
         try {
@@ -23,14 +26,15 @@ public class FileManipulationsReversedLines {
             String line;
             while ((line = br.readLine()) != null) {
                 String next = "";
-                for (int i = line.length() - 1; i >= 0; i --) {
+                for (int i = line.length() - 1; i >= 0; i--) {
                     next += line.charAt(i);
                 }
                 bw.write(next + "\n");
             }
             bw.close();
+            return true;
         } catch (Exception e) {
-            return;
+            return false;
         }
     }
 }
