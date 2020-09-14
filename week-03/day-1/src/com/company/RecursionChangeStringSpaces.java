@@ -2,7 +2,7 @@ package com.company;
 
 public class RecursionChangeStringSpaces {
     public static void main(String[] args) {
-        String sentence = "Why not to remove spaces?";
+        String sentence = " Why not to remove spaces?";
         System.out.println(recursiveRemoveSpaces(sentence));
     }
 
