@@ -9,7 +9,7 @@ public class RecursionChangeStringSpaces {
     public static String recursiveStarAdder(String addStar) {
         if (addStar.length() == 0) {
             return addStar;
-        } else if (addStar.charAt(0) == ' ') {
+        } else if (addStar.charAt(0) == ' ' || addStar.charAt(0) == '.') {
             return addStar.charAt(0) + recursiveStarAdder(addStar.substring(1));
         } else {
             addStar = addStar.charAt(0) + "*" + addStar.substring(1);
