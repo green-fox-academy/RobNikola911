@@ -3,7 +3,7 @@ package com.company;
 public class RecursionFindCommonDivisor {
     public static void main(String[] args) {
 
-        int n1 = 363, n2 = 33;
+        int n1 = 363, n2 = 1;
         int greatestCommonDivisor = recursiveGCD(n1, n2);
         System.out.printf("G.C.D of %d and %d is %d.", n1, n2, greatestCommonDivisor);
 
