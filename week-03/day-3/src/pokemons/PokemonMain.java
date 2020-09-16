@@ -17,7 +17,8 @@ public class PokemonMain {
 
         // Which pokemon should Ash use?
 
-        System.out.print("I choose you, ");
+        System.out.print("I choose you, " + pokemonOfAsh.get(2).name);
+
     }
 
     private static List<Pokemon> initializePokemons() {
