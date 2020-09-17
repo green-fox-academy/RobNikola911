@@ -36,7 +36,7 @@ public class Sharpie {
         return inkAmount;
     }
     public void use(){
-        inkAmount --;
+        inkAmount -= 0.5f;
     }
 
 

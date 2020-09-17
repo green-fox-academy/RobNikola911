@@ -4,19 +4,31 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SharpieSet {
-    private ArrayList<String> sharpielist = new ArrayList<>();
+    private ArrayList<Sharpie> sharpieList = new ArrayList<>();
 
     public SharpieSet() {
 
     }
 
-    public SharpieSet(ArrayList<String> sharpielist) {
-        this.sharpielist = sharpielist;
+    public SharpieSet(ArrayList<Sharpie> sharpieList) {
+        this.sharpieList = sharpieList;
     }
 
-    public void countUsable() {
-        for (String sharpie : sharpielist) {
+    public int countUsable() {
+        int usableSharpie = 0;
+        for (Sharpie sharpie : sharpieList) {
+            if (sharpie.getInkAmount() != 0) {
+                usableSharpie++;
+            }
+        }
+        return usableSharpie;
+    }
 
+    public void removeTrash() {
+        for (Sharpie sharpie : sharpieList) {
+            if (sharpie.getInkAmount() == 0) {
+                sharpieList.remove(sharpie);
+            }
         }
     }
 }
