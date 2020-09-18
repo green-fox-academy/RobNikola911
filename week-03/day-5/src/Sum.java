@@ -1,17 +1,18 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Sum {
 
-    public ArrayList<Integer> getArrayList(int integers) {
+    public int sumOfIntegers(List<Integer> integers) {
 
-        ArrayList<Integer> numbers = new ArrayList<>();
         int sumOfElements = 0;
-        for (int i = 0; i < getArrayList(integers).size(); i++) {
-           sumOfElements += getArrayList(integers).get(i);
+
+        for (int i = 0; i < integers.size(); i++) {
+            sumOfElements += integers.get(i);
         }
 
-        return getArrayList(integers);
+        return sumOfElements;
     }
 
 
