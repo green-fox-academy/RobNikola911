@@ -21,4 +21,17 @@ public class Sponsor extends Person {
     public void hire() {
         hiredStudents++;
     }
+    @Override
+    public void getGoal() {
+        System.out.println("Hire brilliant junior software developers.");
+    }
+
+    @Override
+    public void introduce() {
+        System.out.println("Hi, I'm " + name + ", a " + age + " year old "
+                + gender + " who represents " + company + " and hired "
+                + hiredStudents + " students so far.");
+    }
+
+
 }

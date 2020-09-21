@@ -15,7 +15,7 @@ public class Person {
 
     public Person() {
         name = "Jane Doe";
-        age = 10;
+        age = 30;
         gender = "female";
     }
 

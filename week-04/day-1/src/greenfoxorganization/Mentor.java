@@ -9,9 +9,7 @@ public class Mentor extends Person {
     }
 
     public Mentor() {
-        this.name = "Jane Doe";
-        this.age = 30;
-        this.gender = "female";
+        super();
         this.level = "intermediate";
     }
 
@@ -22,6 +20,7 @@ public class Mentor extends Person {
 
     @Override
     public void introduce() {
-        System.out.println("Hi, I'm " + name + ", a " + age + " year old " + gender + level + " mentor.");
+        System.out.println("Hi, I'm " + name + ", a " + age + " year old "
+                + gender + " " + level + " mentor.");
     }
 }

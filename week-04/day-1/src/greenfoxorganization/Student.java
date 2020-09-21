@@ -5,9 +5,7 @@ public class Student extends Person {
     private int skippedDays;
 
     public Student() {
-        this.name = "Jane Doe";
-        this.age = 30;
-        this.gender = "female";
+        super();
         this.previousOrganization = "The School of Life";
         this.skippedDays = 0;
     }
@@ -20,8 +18,6 @@ public class Student extends Person {
         super(name, age, gender);
         this.previousOrganization = previousOrganization;
         this.skippedDays = 0;
-        int numberOfDays = 0;
-
     }
 
     @Override

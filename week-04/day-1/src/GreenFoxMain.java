@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class GreenFoxMain {
     public static void main(String[] args) {
+
         ArrayList<Person> people = new ArrayList<>();
 
         Person mark = new Person("Mark", 46, "male");
