@@ -29,5 +29,6 @@ public class Gnirts implements CharSequence {
             reverse += this.example.charAt(i);
         }
         return reverse.subSequence(start, end);
+//        return this.example.subSequence(example.length() - end, example.length() - start);
     }
 }
