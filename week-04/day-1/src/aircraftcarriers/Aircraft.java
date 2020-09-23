@@ -42,6 +42,7 @@ public class Aircraft {
             fillAmmo -= missingAmmo;
         } else {
             this.currentAmmo += fillAmmo;
+            return 0;
         }
 
         return fillAmmo - missingAmmo;
