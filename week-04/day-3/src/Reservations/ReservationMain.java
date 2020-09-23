@@ -12,7 +12,7 @@ public class ReservationMain {
             reservations.add(new Reservation());
         }
 
-        for(Reservation bookings: reservations) {
+        for (Reservation bookings : reservations) {
             System.out.println("Booking# " + bookings.getCodeBooking() + " for " + bookings.getDowBooking());
         }
     }
