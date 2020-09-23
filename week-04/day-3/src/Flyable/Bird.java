@@ -20,16 +20,16 @@ public class Bird extends Animal implements Flyable {
 
     @Override
     public void land() {
-        System.out.println("Landing...");
+        System.out.println("Quick landing...");
     }
 
     @Override
     public void fly() {
-        System.out.println("Flying...");
+        System.out.println("Wings flapping...");
     }
 
     @Override
     public void takeOff() {
-        System.out.println("Taking off...");
+        System.out.println("Like a bird...");
     }
 }

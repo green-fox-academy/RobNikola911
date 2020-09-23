@@ -5,6 +5,7 @@ public class Helicopter extends Vehicle implements Flyable {
         super(model, color, year);
     }
 
+
     @Override
     public void land() {
         System.out.println("Landing...");
@@ -18,5 +19,14 @@ public class Helicopter extends Vehicle implements Flyable {
     @Override
     public void takeOff() {
         System.out.println("Taking off...");
+    }
+
+    @Override
+    public String toString() {
+        return "Helicopter{" +
+                "model='" + model + '\'' +
+                ", color='" + color + '\'' +
+                ", year=" + year +
+                '}';
     }
 }
