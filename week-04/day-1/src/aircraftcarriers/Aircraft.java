@@ -1,66 +1,66 @@
 package aircraftcarriers;
 
 public class Aircraft {
-    protected String type;
-    protected int maxAmmo;
-    protected int aircraftDamage;
+
     protected int currentAmmo;
-    protected int damageDealt;
+    protected int baseDamage;
+    protected int maxAmmo;
+    protected String type;
 
+    public Aircraft() {
+    }
 
-    public Aircraft(String type) {
-        if (type.equals("F16")) {
-            maxAmmo = 8;
-            aircraftDamage = 30;
-        } else {
-            maxAmmo = 12;
-            aircraftDamage = 50;
-        }
-        this.type = type;
-        currentAmmo = 0;
-        damageDealt = 0;
+    public Aircraft(int currentAmmo, int baseDamage, int maxAmmo) {
+        this.currentAmmo = 0;
+        this.baseDamage = 0;
+        this.maxAmmo = 0;
+    }
+
+    public int getAmmunition() {
+        return currentAmmo;
+    }
+
+    public void setAmmunition(int currentAmmo) {
+        this.currentAmmo = currentAmmo;
+    }
+
+    public int getBaseDamage() {
+        return baseDamage;
+    }
+
+    public void setBaseDamage(int baseDamage) {
+        this.baseDamage = baseDamage;
     }
 
     public int fight() {
-        int damage = aircraftDamage * currentAmmo;
-        damageDealt += damage;
-        currentAmmo = 0;
-        return damage;
+        int totalDamage = baseDamage * currentAmmo;
+        setAmmunition(0);
+        return totalDamage;
     }
 
-    public int refill(int fillAmmo) {
-//        It should take a number as parameter and subtract as much ammo as possible
-//        It can't have more ammo than the number or the max ammo (can't get more ammo
-//        than what's coming from the parameter or the max ammo of the aircraft)
-//        It should return the remaining ammo
-//        Eg. Filling an empty F35 with 300 would completely fill the storage of the aircraft and
-//        would return the remaining 288
-
-        int missingAmmo = this.maxAmmo - this.currentAmmo;
-        if (missingAmmo > fillAmmo) {
-            this.currentAmmo = this.currentAmmo + missingAmmo;
-            fillAmmo -= missingAmmo;
-        } else {
-            this.currentAmmo += fillAmmo;
-            return 0;
+    public int refill(int storeOfAmmo) {
+        if (storeOfAmmo > maxAmmo)
+            for (int i = 0; i < (maxAmmo - currentAmmo); i++) {
+                storeOfAmmo -= maxAmmo;
+            }
+        else {
+            for (int i = 0; i < storeOfAmmo; i++) {
+                storeOfAmmo--;
+            }
         }
-
-        return fillAmmo - missingAmmo;
+        return storeOfAmmo;
     }
 
     public String getType() {
         return type;
-
     }
 
     public String getStatus() {
-        //        It should return a string like: Type F35, Ammo: 10, Base Damage: 50, All Damage: 500
-        return "Type " + getType() + ", Ammo: " + this.currentAmmo + " Base Damage: "
-                + this.aircraftDamage + ", All Damage: " + this.damageDealt;
+        return "Type: " + getType() + " , Ammo: " + getAmmunition() + " , Base damage: "
+                + getBaseDamage() + " , All " + "damage: " + fight();
     }
 
-    public boolean isPriority() {
-//        It should return if the aircraft is priority in the ammo fill queue. It's true for F35 and false for F16
-        return this.getType().equals("F35");
+    public Boolean isPriority() {
+        return true;
     }
 }

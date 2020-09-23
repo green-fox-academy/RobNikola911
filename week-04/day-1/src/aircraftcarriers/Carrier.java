@@ -4,19 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Carrier {
+
     protected List<Aircraft> storedAircrafts;
     protected int ammoStorage;
-    private int totalAmmo;
+    protected int initialAmmo;
     protected int HP;
 
     public Carrier() {
-
+        this.storedAircrafts = new ArrayList<>();
+        this.ammoStorage = 2300;
+        this.initialAmmo = 100;
+        this.HP = 5000;
     }
 
-    public Carrier(int ammoStorage, int HP) {
-        this.ammoStorage = ammoStorage;
-        this.HP = HP;
-        storedAircrafts = new ArrayList<>();
+    public Carrier(int initialAmmo) {
+        this.storedAircrafts = new ArrayList<>();
+        this.ammoStorage = 2300;
+        this.initialAmmo = initialAmmo;
+        this.HP = 5000;
     }
 
     public void add(Aircraft aircraft) {
@@ -24,34 +29,44 @@ public class Carrier {
     }
 
     public void fill() throws Exception {
-        if (ammoStorage == 0) {
-            throw new Exception("No more ammo, need refill");
-        }
-        this.totalAmmo = 0;
-
         for (Aircraft aircraft : storedAircrafts) {
-            totalAmmo += aircraft.maxAmmo - aircraft.currentAmmo;
+            aircraft.setAmmunition(aircraft.maxAmmo);
+            ammoStorage -= aircraft.maxAmmo - aircraft.getAmmunition();
         }
-
-        if (totalAmmo > ammoStorage) {
-            for (Aircraft aircraft : storedAircrafts) {
+        for (Aircraft aircraft : storedAircrafts) {
+            if (ammoStorage < aircraft.maxAmmo - aircraft.getAmmunition()) {
                 if (aircraft.isPriority()) {
-                    ammoStorage = aircraft.refill(ammoStorage);
+                    aircraft.refill(ammoStorage);
                 }
             }
         }
         for (Aircraft aircraft : storedAircrafts) {
-            ammoStorage = aircraft.refill(ammoStorage);
+            if (ammoStorage < aircraft.maxAmmo - aircraft.getAmmunition()) {
+                if (!aircraft.isPriority()) {
+                    aircraft.refill(ammoStorage);
+                }
+            }
+        }
+        if (ammoStorage == 0) {
+            throw new Exception("There is no ammo left!");
         }
     }
 
-    public void getStatus() {
+    public int getTotalDamage() {
         int totalDamage = 0;
         for (Aircraft aircraft : storedAircrafts) {
-            totalDamage += aircraft.damageDealt;
+            totalDamage += aircraft.currentAmmo * aircraft.baseDamage;
         }
-        System.out.println("HP: " + storedAircrafts.size() * 1000 + ", Aircraft count: " + storedAircrafts.size() +
-                ", Ammo Storage: " + ammoStorage + ", Total Damage: " + totalDamage);
+        return totalDamage;
+    }
+
+    public void fight(Carrier carrier) {
+        HP -= getTotalDamage();
+    }
+
+    public void getStatus() {
+        System.out.print("HP: " + this.HP + " , Aircraft count: " + storedAircrafts.size() + ", Ammo " +
+                "storage: " + ammoStorage + " , Total damage: " + getTotalDamage() + "\n " + " Aircrafts: \n ");
         for (Aircraft aircraft : storedAircrafts) {
             System.out.println(aircraft.getStatus());
         }
