@@ -8,8 +8,8 @@ public class OddNumbers {
                 {4, 5, 6, 12}, // 1
                 {7, 8, 7, 1}, // 2
                 {3, 2, 9, 1}};  // 3
-        // 0   1  2   3
-
+            // 0   1  2   3
+        System.out.println(example.length);
         sumDivisibleBy5And7(example);
         System.out.println("There are " + sumOddsDiv3(example)[0] +
                 " numbers and the sum is " + sumOddsDiv3(example)[1]);
