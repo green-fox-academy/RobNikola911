@@ -1,9 +1,7 @@
 package streamexamples;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -111,7 +109,7 @@ public class StreamExercises {
                 })
                 .forEach(s -> System.out.println("forEach: " + s));
 
-        Stream.of("d2", "a2", "b1", "b3", "c")
+        Stream.of("e2", "a2", "b1", "b3", "c")
                 .map(s -> {
                     System.out.println("map: " + s);
                     return s.toUpperCase();
@@ -151,7 +149,6 @@ public class StreamExercises {
                 })
                 .forEach(s -> System.out.println("forEach: " + s));
 
-/*
     int max = 1000000;
     List<String> values = new ArrayList<>(max);
     for (int i = 0; i < max; i++) {
@@ -164,9 +161,9 @@ public class StreamExercises {
     long t1 = System.nanoTime();
     long millis = TimeUnit.NANOSECONDS.toMillis(t1 - t0);
     System.out.println(String.format("sequential sort took: %d ms", millis));
-// sequential sort took: 899 ms*/
+// sequential sort took: 899 ms
 
-    /*Map<Integer, String> map = new HashMap<>();
+    Map<Integer, String> map = new HashMap<>();
     for (int i = 0; i < 10; i++) {
       map.putIfAbsent(i, "val" + i);
     }
@@ -182,6 +179,6 @@ public class StreamExercises {
     map.remove(3, "val3");
     System.out.println(map.get(3));             // val33
     map.remove(3, "val33");
-    System.out.println(map.get(3));             // null*/
+    System.out.println(map.get(3));             // null
     }
 }
