@@ -1,17 +1,18 @@
-Rob Nikola
-modify nr.0
-modify nr.1
-modify nr.2
-modify nr.3
-modify nr.4
-modify nr.5
-modify nr.6
-modify nr.7
+modify and verify nr.0
+modify and verify nr.1
+modify and verify nr.2
+modify and verify nr.3
 modify and verify
 modify and verify
 modify and verify
 modify and verify
+
+modify and verify nr.0
+modify and verify nr.1
+modify and verify nr.2
+modify and verify nr.3
 modify and verify
 modify and verify
 modify and verify
 modify and verify
+
