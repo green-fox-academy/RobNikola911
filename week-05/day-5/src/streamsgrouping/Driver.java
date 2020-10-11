@@ -21,13 +21,12 @@ public class Driver {
         System.out.println(persons.stream().collect(groupingBy((Person p) -> p.getCountry(), counting())));
         System.out.println("--------Obtain US and non-US based persons using partitioningBy and map names to Uppercase using maping------");
         System.out.println(persons.stream().collect(partitioningBy((Person p) -> p.getCountry().equals("US"),
-                                                                            mapping(p -> p.getName().toUpperCase(),
-                                                                            toList()))));
+                                                                    mapping(p -> p.getName().toUpperCase(),
+                                                                    toList()))));
         System.out.println("--------Obtain persons in each country using groupingBy & map the names to uppercase using maping------");
         System.out.println(persons.stream().collect(groupingBy((Person p) -> p.getCountry(),
-                                                                        mapping(p -> p.getName().toUpperCase(),
-                                                                        toList()))));
-
+                                                                mapping(p -> p.getName().toUpperCase(),
+                                                                toList()))));
     }
 
     static List<Person> populatedWithData() {
