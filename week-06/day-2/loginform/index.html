@@ -6,22 +6,28 @@
     <link rel='stylesheet' href='styles.css'/>
 </head>
 <body>
+<form action="" method="GET">
+    <p>ACCOUNT LOGIN</p>
+    <label for="username">USERNAME</label>
+    <input type="text" name="username" id="username" required autofocus>
+    <label for="password">PASSWORD</label>
+    <input type="password" name="password" id="password" required>
+    <!-- Element to toggle password -->
+    <input type="checkbox" id="checkbox1" onclick="toggleVisibility()"/>
+    <label for="checkbox1" id="eye"><img src="eye.png"/></label>
+    <script>
+        function toggleVisibility() {
+            var x = document.getElementById("password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
 
-<form action="https://newsletter-ws.herokuapp.com/signup" method="post">
-
-    <div class="container">
-        <header class='login-form-header'>
-            <h1>ACCOUNT LOGIN</h1>
-        </header>
-        <label for="uname"><b>USERNAME</b></label><br>
-        <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
-        <br>
-        <label for="psw"><b>PASSWORD</b></label><br>
-        <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
-        <span class="psw"><a href="#">Forgot Password?</a></span>
-        <br>
-        <button type="submit">Login</button>
-    </div>
+    <a href="" class="forgot-pswd"> Forgot Password?</a>
+    <input type="submit" value="Login" name="login" id="login">
 </form>
 </body>
 </html>

@@ -1,77 +1,71 @@
 body {
-    background-color: grey;
-    font-family: Arial, Helvetica, sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #292929;
-}
-
-h1 {
-    font-weight: lighter;
-    margin-bottom: 30px;
+    background-color: #e2e2e2;
 }
 
 form {
-    border: 3px solid #f7f7f7;
-    width: 50%;
+    background-color: #ffffff;
+    width: 300px;
+    margin: 0 auto;
 }
 
-input[type=text], input[type=password] {
-
-    padding: 15px 20px;
+form {
     display: flex;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-    width: 80%;
-    border-radius: 5px;
-    margin-bottom: 10px;
-
+    flex-direction: column;
+    padding: 30px 50px;
 }
 
 label {
-    display: flex;
-    margin-bottom: 1px;
+    padding-top: 15px;
+    font-size: 15px;
 }
 
-/* Set a style for all buttons */
-button {
-    background-color: #1a1818;
-    color: white;
-    padding: 14px 20px;
-    margin: 8px 0;
-    border: none;
-    cursor: pointer;
-    border-radius: 20px;
-    width: 120px;
+label, input {
+    margin: 5px 0;
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-    opacity: 0.8;
+input {
+    height: 25px;
 }
 
+input[type="submit"] {
+    width: 100px;
+    background-color: #000000;
+    color: #ffffff;
+    text-align: center;
+    float: left;
+    padding: 5px 30px;
+    border-radius: 40px;
+    margin-top: 20px;
+    height: 35px;
+}
 
-/* Add padding to containers */
-.container {
-
-    background-color: #f7f7f7;
-    flex-direction: row;
-    align-items: center;
-    padding-left: 100px;
-    padding-top: 20px;
-    padding-bottom: 30px;
-    justify-content: center;
+a {
+    text-align: right;
+    text-decoration: none;
+    color: #000000;
     font-size: 12px;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    text-align: right;
-    margin-right: 115px;
-    padding-top: 1px;
-    color: dimgrey;
+form p {
+    font-size: 24px;
 }
+
+input:focus {
+    outline: solid 2px #39e600;
+}
+
+input[type="password"] {
+    background: url(eye.png) no-repeat;
+    background-position-x: 260px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+#eye {
+    position: absolute;
+    left: 795px;
+    top: 225px;
+}
+
