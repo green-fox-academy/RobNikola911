@@ -1,0 +1,19 @@
+html {background-color: #e2e2e2;}
+body {margin: 20px 50px; padding: 5%; display: flex; flex-direction: row; background-color: #ffffff;}
+form {width: 40%; display: flex; flex-direction: column;}
+
+form p {font-size: 25px; margin-top: 0; margin-bottom: 15px;}
+input {outline: 0; border: none; border-bottom: 1px solid black; height: 25px; margin-top: 5px;}
+input:focus {border-bottom: 2px solid #00b386;}
+input[type="submit"] {background-color: #00b386; color: white; padding: 5px 10px; margin-top: 20px;}
+
+
+.or-btn {width: 15%; padding-top: 100px;  text-align: center;}
+.or-btn p {display: inline; padding: 10px 10px; background-color: #e2e2e2; border: 1px solid #e2e2e2; border-radius: 25px;}
+
+.links {width: 35%; padding-top: 60px;}
+.links a {text-decoration: none; color: white;}
+.login {display: block; width: 100%; text-align: center; padding: 5px 25px; margin-bottom: 20px;}
+.fb {background-color: navy;}
+.twitter {background-color: cornflowerblue;}
+.google {background-color: crimson;}
