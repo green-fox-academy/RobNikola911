@@ -5,6 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<p th:text="'Hello! This site was loaded ' +${numcount}+ ' times since last server start.'"></p>
+<p th:styleappend="|font-size:${fontSize}px|"
+   th:text="'Hello! This site was loaded ' +${numcount}+ ' times since last server start.'"></p>
 </body>
 </html>
