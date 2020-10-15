@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<table>
+    <tr>
+        <th>Name:</th>
+        <th>Balance:</th>
+        <th>Type of Animal:</th>
+        <th>Index:</th>
+        <th>King:</th>
+    </tr>
+    <tr th:each="accounts : ${accountList}">
+        <td th:text="${accounts.name}"></td>
+        <td th:text="${#numbers.formatDecimal(accounts.balance, 0, 'COMMA', 2, 'POINT') + ' Zebra'}"></td>
+        <td th:text="${accounts.animalType}"></td>
+        <td th:text="${accountsStat.count}"></td>
+        <td th:text="${accounts.isKing()}"></td>
+    </tr>
+</table>
+
+</body>
+</html>
