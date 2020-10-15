@@ -2,6 +2,7 @@ package com.thymeleaf.exercise.controllers;
 
 
 import com.thymeleaf.exercise.models.BankAccount;
+import com.thymeleaf.exercise.models.GoodBad;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,15 +15,6 @@ import java.util.List;
 
 @Controller
 public class BankAccountController {
-
-//    private List<BankAccount> bankAccountList = new ArrayList<>();
-//
-//    public BankAccountController() {
-//        bankAccountList.add(new BankAccount("Joey", 1500, "cat"));
-//        bankAccountList.add(new BankAccount("Simba", 2000, "lion"));
-//        bankAccountList.add(new BankAccount("Meg", 3000, "zebra"));
-//
-//    }
 
     @RequestMapping(method = RequestMethod.GET, path = "/show")
     public String showBankAccount(Model model) {
@@ -38,13 +30,16 @@ public class BankAccountController {
 
     @RequestMapping(method = RequestMethod.GET, path = "/accountlist")
     public String accountList(Model model) {
+
         List<BankAccount> accounts = new ArrayList<>();
         accounts.add(new BankAccount("Nala", 1500, "lion"));
         accounts.add(new BankAccount("Timon", 2500, "meerkat"));
         accounts.add(new BankAccount("Pumba", 1000, "pig"));
         accounts.add(new BankAccount("Scar", 3000, "lion"));
         accounts.add(new BankAccount("Mufasa", 4500, "lion"));
+
         model.addAttribute("accountList", accounts);
+
         return "accountlist";
     }
 }
