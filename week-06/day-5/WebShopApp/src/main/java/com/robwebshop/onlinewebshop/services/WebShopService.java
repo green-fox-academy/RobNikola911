@@ -8,5 +8,5 @@ public interface WebShopService {
 
     void addShopItem (ShopItem item);
     ShopItem getShopItemByName(String name);
-    List<ShopItem> getallShopItems();
+    List<ShopItem> getAllShopItems();
 }
