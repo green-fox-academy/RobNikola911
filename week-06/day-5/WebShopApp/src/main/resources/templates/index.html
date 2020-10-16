@@ -10,11 +10,11 @@
     <h1>My Shop</h1>
 </div>
 <div>
-    <a href="/webshop/only-available" class="button"> ONLY AVAILABLE</a>
-    <a href="/webshop/cheapest-first" class="button"> CHEAPEST FIRST</a>
-    <a href="/webshop/contains-nike" class="button"> CONTAINS NIKE</a>
-    <a href="/webshop/average-stock" class="button"> AVERAGE STOCK</a>
-    <a href="/webshop/most-expensive" class="button"> MOST EXPENSIVE AVAILABE</a>
+    <a th:href="@{/webshop/only-available}" class="button"> ONLY AVAILABLE</a>
+    <a th:href="@{/webshop/cheapest-first}" class="button"> CHEAPEST FIRST</a>
+    <a th:href="@{/webshop/contains-nike}" class="button"> CONTAINS NIKE</a>
+    <a th:href="@{/webshop/average-stock}" class="button"> AVERAGE STOCK</a>
+    <a th:href="@{/webshop/most-expensive}" class="button"> MOST EXPENSIVE AVAILABE</a>
 </div>
 <table>
     <tr>
@@ -23,11 +23,11 @@
         <th>Price</th>
         <th>Quantity of stock</th>
     </tr>
-    <tr th:each="item : ${items}">
-        <td th:text="${item.getName()}"></td>
-        <td th:text="${item.description}"></td>
-        <td th:text="${item.price} + ' Huf'"></td>
-        <td th:text="${item.quantityOfStock}"></td>
+    <tr th:each="items : ${items}">
+        <td th:text="${items.getName()}"></td>
+        <td th:text="${items.description}"></td>
+        <td th:text="${items.price} + ' Huf'"></td>
+        <td th:text="${items.quantityOfStock}"></td>
     </tr>
 </table>
 </body>
