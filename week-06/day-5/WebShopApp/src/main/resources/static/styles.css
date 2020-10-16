@@ -1,0 +1,22 @@
+h1{
+    font-family: monospace;
+    font-size: 52px;
+    font-weight: normal;
+    color: aqua;
+    border-bottom: 2px solid aqua;
+    padding-bottom: 3px;
+}
+
+.button {
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    text-decoration: none;
+    color: white;
+}
+
+a{
+    font-family: monospace;
+    border: 10px solid red;
+    background-color: red;
+    border-radius: 10px;
+}

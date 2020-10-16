@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>WebShop AvgStock</title>
+    <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<div>
+    <h1>My Shop</h1>
+</div>
+<div>
+    <a href="/webshop/only-available" class="button"> ONLY AVAILABLE</a>
+    <a href="/webshop/cheapest-first" class="button"> CHEAPEST FIRST</a>
+    <a href="/webshop/contains-nike" class="button"> CONTAINS NIKE</a>
+    <a href="/webshop/average-stock" class="button"> AVERAGE STOCK</a>
+    <a href="/webshop" class="button"> MOST EXPENSIVE AVAILABE</a>
+</div>
+<h2 th:text="'Average stock:' + ${items}"></h2>
+</body>
+</html>
