@@ -7,11 +7,10 @@
 </head>
 <body>
 <div>
-    <div th:each="account : ${bankAccount}">
-        <h1 th:text="${bankAccount.name} + ' - ' + ${#numbers.formatDecimal(bankAccount.balance, 0, 'COMMA', 2, 'POINT') + ' Zebra'} +
-          ' (' + ${bankAccount.animalType} + ') '"></h1>
+    <div>
+        <p th:utext="'Using th:utext: ' + ${output}" ></p>
+        <p th:text="'Using th:text: ' + ${output}" ></p>
     </div>
 </div>
-
 </body>
 </html>

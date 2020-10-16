@@ -2,44 +2,44 @@ package com.thymeleaf.exercise.controllers;
 
 
 import com.thymeleaf.exercise.models.BankAccount;
-import com.thymeleaf.exercise.models.GoodBad;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.GetMapping;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
 public class BankAccountController {
 
-    @RequestMapping(method = RequestMethod.GET, path = "/show")
-    public String showBankAccount(Model model) {
-        model.addAttribute("bankAccount", new BankAccount("Simba", 2000, "lion"));
-        return "show";
+    private List<BankAccount> allAccounts = new ArrayList<>();
+
+    public BankAccountController() {
+        allAccounts.add(new BankAccount("Simba", 2000, "Lion"));
+        allAccounts.add(new BankAccount("Zazu", 3000, "Bird"));
+        allAccounts.add(new BankAccount("Pumbaa", 1500, "Pig"));
+        allAccounts.add(new BankAccount("Ed", 500, "Hyena"));
+        allAccounts.add(new BankAccount("Musafa", 5000, "King"));
+        allAccounts.add(new BankAccount("Lana", 3250, "Giraffe"));
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/enjoy")
+    @GetMapping("/show")
+    public String showAccount(Model model) {
+        BankAccount simba = new BankAccount("Simba", 2000, "Lion");
+        model.addAttribute("account", simba);
+        return "account";
+    }
+
+    @GetMapping("/htmlception")
     public String displayString(Model model) {
-        model.addAttribute("displayString", "This is an <em>HTML</em> text. <b>Enjoy yourself!</b>");
-        return "enjoy";
+        String output = "This is an <em>HTML</em> text. <b>Enjoy yourself!</b>";
+        model.addAttribute("output", output);
+        return "htmlception";
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/accountlist")
-    public String accountList(Model model) {
-
-        List<BankAccount> accounts = new ArrayList<>();
-        accounts.add(new BankAccount("Nala", 1500, "lion"));
-        accounts.add(new BankAccount("Timon", 2500, "meerkat"));
-        accounts.add(new BankAccount("Pumba", 1000, "pig"));
-        accounts.add(new BankAccount("Scar", 3000, "lion"));
-        accounts.add(new BankAccount("Mufasa", 4500, "lion"));
-
-        model.addAttribute("accountList", accounts);
-
-        return "accountlist";
+    @GetMapping("/showAll")
+    public String showAllAccounts(Model model) {
+        model.addAttribute("accounts", allAccounts);
+        return "bank-accounts";
     }
 }

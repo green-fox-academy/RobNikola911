@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Thymeleaf Exercise #</title>
+    <link rel="stylesheet" th:href="@{/style.css}" />
+    <meta charset="utf-8" />
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Balance</th>
+            <th>Animal</th>
+            <th>King</th>
+            <th>Type</th>
+        </tr>
+        <tr     th:style="${account.animalType} == 'King' ? 'color: red; background-color: #ffe6e6' : 'color: black'"
+                th:each="account : ${accounts}">
+            <td th:text="${accountStat.index}" ></td>
+
+            <td th:text="${account.name}"></td>
+
+            <td th:text="${#numbers.formatDecimal(account.balance,0, 2, 'POINT')}"></td>
+
+            <td th:text="${account.animalType}"></td>
+
+            <td th:if="${account.animalType} == 'King'" th:text="'Yes'" ></td>
+            <td th:unless="${account.animalType} == 'King'" th:text="'No'" ></td>
+            <td th:text="(${accountStat.index} % 3 != 0 or ${account.name} == 'Simba') ? ('Good one') : ('Bad one')" ></td>
+        </tr>
+    </table>
+</div>
+<br><br>
+<!--<form action="/showAll" method="post">
+    <label> Choose account name: </label>
+    <select name="name" required >
+        <option th:each="account : ${accounts}"
+                th:value="${account.name}"
+                th:utext="${account.name}"
+        ></option>
+    </select>
+    <input type="submit" name="submit" value="Raise account">
+</form>-->
+</body>
+</html>
