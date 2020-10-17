@@ -16,6 +16,12 @@
     <a th:href="@{/webshop/average-stock}" class="button"> AVERAGE STOCK</a>
     <a th:href="@{/webshop/most-expensive}" class="button"> MOST EXPENSIVE AVAILABE</a>
 </div>
+<br>
+<form th:action="@{/webshop/search}" method="POST" name="search" id="search">
+    <label for="input1">Search for:</label>
+    <input type="text" class="form-control" placeholder="Search here for key word" name="text" id="input1">
+</form>
+<br>
 <table>
     <tr>
         <th>Name</th>

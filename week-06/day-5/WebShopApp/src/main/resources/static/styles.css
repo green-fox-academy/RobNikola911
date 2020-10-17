@@ -20,3 +20,12 @@ a{
     background-color: red;
     border-radius: 10px;
 }
+
+table {
+    padding: 5px;
+}
+
+th, td {
+    padding: 10px;
+    padding-left: 20px;
+}
