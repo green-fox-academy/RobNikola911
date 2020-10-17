@@ -14,4 +14,5 @@ public interface WebShopService {
     ShopItem getNike(String name);
     Double getAverageStock();
     ShopItem getMostExpensive();
+    ShopItem getItemByName(String string);
 }

@@ -49,7 +49,8 @@ public class WebShopServiceImpl implements WebShopService {
     @Override
     public ShopItem getNike(String name) {
         Optional<ShopItem> optionalShopItem = webShopRepository.getItems().stream()
-                .filter(i -> i.getName().equalsIgnoreCase(name) || i.getDescription().toLowerCase().contains(name.toLowerCase()))
+                .filter(i -> i.getName().equalsIgnoreCase(name) ||
+                        i.getDescription().toLowerCase().contains(name.toLowerCase()))
                 .findAny();
         return optionalShopItem.orElse(null);
     }
@@ -69,6 +70,15 @@ public class WebShopServiceImpl implements WebShopService {
                 .stream()
                 .max(Comparator.comparingDouble(ShopItem::getPrice));
 
+        return optionalShopItem.orElse(null);
+    }
+
+    @Override
+    public ShopItem getItemByName(String string) {
+        Optional<ShopItem> optionalShopItem = webShopRepository.getItems().stream()
+                .filter(i -> i.getName().toLowerCase().contains(string.toLowerCase()) ||
+                        i.getDescription().toLowerCase().contains(string.toLowerCase()))
+                .findAny();
         return optionalShopItem.orElse(null);
     }
 }

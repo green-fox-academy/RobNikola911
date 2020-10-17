@@ -5,6 +5,8 @@ import com.robwebshop.onlinewebshop.services.WebShopServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class WebShopController {
@@ -47,4 +49,9 @@ public class WebShopController {
         return "index";
     }
 
+    @PostMapping("webshop/search")
+    public String searchItem(Model model, @RequestParam(name="text") String string) {
+        model.addAttribute("items", webShopService.getItemByName(string));
+        return "index";
+    }
 }
