@@ -1,10 +1,12 @@
 package com.robwebshop.onlinewebshop.controllers;
 
 
+import com.robwebshop.onlinewebshop.models.ShopItem;
 import com.robwebshop.onlinewebshop.services.WebShopServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -49,9 +51,47 @@ public class WebShopController {
         return "index";
     }
 
+/*    @PostMapping("webshop/search")
+    public String searchItem(@ModelAttribute("text") ShopItem item) {
+        webShopService.addShopItem(item);
+        return "index";
+    }*/
+
     @PostMapping("webshop/search")
     public String searchItem(Model model, @RequestParam(name="text") String string) {
         model.addAttribute("items", webShopService.getItemByName(string));
         return "index";
     }
+
+    @GetMapping("/webshop/more-filters")
+    public String shopFilteredItems(Model model) {
+        model.addAttribute("items", webShopService.getAllShopItems());
+        return "filters";
+    }
+
+    @PostMapping("webshop/more-filters")
+    public String filterByType(Model model, @RequestParam(name="text") String string) {
+        model.addAttribute("items", webShopService.getItemByType(string));
+        return "filters";
+    }
+
+    @GetMapping("webshop/filter-clothesandshoes")
+    public String filterClothes(Model model) {
+        model.addAttribute("items", webShopService.getClothes());
+        return "filters";
+    }
+
+    @GetMapping("webshop/filter-electronics")
+    public String filterElectronics(Model model) {
+        model.addAttribute("items", webShopService.getElectronics());
+        return "filters";
+    }
+
+    @GetMapping("webshop/filter-beveragesandsnacks")
+    public String filterBeverages(Model model) {
+        model.addAttribute("items", webShopService.getBeverages());
+        return "filters";
+    }
+
+
 }

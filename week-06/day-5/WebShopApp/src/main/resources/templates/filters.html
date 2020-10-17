@@ -11,17 +11,17 @@
     <h1><a th:href="@{/webshop/more-filters}" class="header">More >></a></h1>
 </div>
 <div>
-    <a th:href="@{/webshop/only-available}" class="button"> ONLY AVAILABLE</a>
-    <a th:href="@{/webshop/cheapest-first}" class="button"> CHEAPEST FIRST</a>
-    <a th:href="@{/webshop/contains-nike}" class="button"> CONTAINS NIKE</a>
-    <a th:href="@{/webshop/average-stock}" class="button"> AVERAGE STOCK</a>
-    <a th:href="@{/webshop/most-expensive}" class="button"> MOST EXPENSIVE AVAILABE</a>
+    <a th:href="@{/webshop/filter-clothesandshoes}" class="button"> CLOTHES AND SHOES</a>
+    <a th:href="@{/webshop/filter-electronics}" class="button"> ELECTRONICS</a>
+    <a th:href="@{/webshop/filter-beveragesandsnacks}" class="button"> BEVERAGES AND SNACKS</a>
+<!--    <a th:href="@{/webshop/average-stock}" class="button"> EURO</a>-->
+<!--    <a th:href="@{/webshop/most-expensive}" class="button"> ORIGINAL CURRENCY</a>-->
 </div>
 <br>
 <div>
 
 </div>
-<form th:action="@{/webshop/search}" method="POST" name="search" id="search">
+<form th:action="@{/webshop/more-filters}" method="POST" name="search" id="search">
     <label for="input1">Search for:</label>
     <input type="text" class="form-control" placeholder="Search here for key word" name="text" id="input1">
 </form>

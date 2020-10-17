@@ -74,11 +74,39 @@ public class WebShopServiceImpl implements WebShopService {
     }
 
     @Override
-    public ShopItem getItemByName(String string) {
-        Optional<ShopItem> optionalShopItem = webShopRepository.getItems().stream()
+    public List<ShopItem> getItemByName(String string) {
+        return webShopRepository.getItems().stream()
                 .filter(i -> i.getName().toLowerCase().contains(string.toLowerCase()) ||
                         i.getDescription().toLowerCase().contains(string.toLowerCase()))
-                .findAny();
-        return optionalShopItem.orElse(null);
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ShopItem> getItemByType(String string) {
+        return webShopRepository.getItems().stream()
+                .filter(i -> i.getName().toLowerCase().contains(string.toLowerCase()) ||
+                        i.getDescription().toLowerCase().contains(string.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ShopItem> getClothes() {
+        return webShopRepository.getItems().stream()
+                .filter(i -> i.getType().equalsIgnoreCase("CLOTHES AND SHOES"))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ShopItem> getElectronics() {
+        return webShopRepository.getItems().stream()
+                .filter(i -> i.getType().equalsIgnoreCase("ELECTRONICS"))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ShopItem> getBeverages() {
+        return webShopRepository.getItems().stream()
+                .filter(i -> i.getType().equalsIgnoreCase("BEVERAGES AND SNACKS"))
+                .collect(Collectors.toList());
     }
 }

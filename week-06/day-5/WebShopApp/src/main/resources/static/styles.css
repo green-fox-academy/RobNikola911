@@ -12,9 +12,6 @@ h1{
     -moz-appearance: button;
     text-decoration: none;
     color: white;
-}
-
-a{
     font-family: monospace;
     border: 10px solid red;
     background-color: red;

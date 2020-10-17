@@ -6,9 +6,10 @@
     <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<div>
-    <h1>My Shop</h1>
-</div>
+    <div>
+        <h1><a th:href="@{/webshop}" class="header">My Shop</a></h1>
+        <h1><a th:href="@{/more-filters}" class="header">More >></a></h1>
+    </div>
 <div>
     <a href="/webshop/only-available" class="button"> ONLY AVAILABLE</a>
     <a href="/webshop/cheapest-first" class="button"> CHEAPEST FIRST</a>
