@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Optional;
+
 @Controller
 public class WebShopController {
 
@@ -58,7 +60,7 @@ public class WebShopController {
     }*/
 
     @PostMapping("webshop/search")
-    public String searchItem(Model model, @RequestParam(name="text") String string) {
+    public String searchItem(Model model, @RequestParam(value = "text") String string) {
         model.addAttribute("items", webShopService.getItemByName(string));
         return "index";
     }
@@ -69,29 +71,24 @@ public class WebShopController {
         return "filters";
     }
 
-    @PostMapping("webshop/more-filters")
-    public String filterByType(Model model, @RequestParam(name="text") String string) {
-        model.addAttribute("items", webShopService.getItemByType(string));
+//    @PostMapping("webshop/more-filters")
+//    public String filterByType(Model model, @RequestParam(name="text") String string) {
+//        model.addAttribute("items", webShopService.getItemByType(string));
+//        return "filters";
+//    }
+
+    @GetMapping("/webshop/items")
+    public String filterClothes(Model model, @RequestParam Optional<String> type) {
+
+        model.addAttribute("items", webShopService.getItemByType(type.get()));
         return "filters";
     }
 
-    @GetMapping("webshop/filter-clothesandshoes")
-    public String filterClothes(Model model) {
-        model.addAttribute("items", webShopService.getClothes());
-        return "filters";
-    }
-
-    @GetMapping("webshop/filter-electronics")
-    public String filterElectronics(Model model) {
-        model.addAttribute("items", webShopService.getElectronics());
-        return "filters";
-    }
-
-    @GetMapping("webshop/filter-beveragesandsnacks")
+/*    @GetMapping("webshop/filter-beveragesandsnacks")
     public String filterBeverages(Model model) {
         model.addAttribute("items", webShopService.getBeverages());
         return "filters";
-    }
+    }*/
 
 
 }

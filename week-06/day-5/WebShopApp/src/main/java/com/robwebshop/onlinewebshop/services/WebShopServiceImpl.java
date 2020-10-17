@@ -81,32 +81,32 @@ public class WebShopServiceImpl implements WebShopService {
                 .collect(Collectors.toList());
     }
 
+//    @Override
+//    public List<ShopItem> getItemByType(String string) {
+//        return webShopRepository.getItems().stream()
+//                .filter(i -> i.getName().toLowerCase().contains(string.toLowerCase()) ||
+//                        i.getDescription().toLowerCase().contains(string.toLowerCase()))
+//                .collect(Collectors.toList());
+//    }
+
     @Override
-    public List<ShopItem> getItemByType(String string) {
+    public List<ShopItem> getItemByType(String type) {
         return webShopRepository.getItems().stream()
-                .filter(i -> i.getName().toLowerCase().contains(string.toLowerCase()) ||
-                        i.getDescription().toLowerCase().contains(string.toLowerCase()))
+                .filter(i -> i.getType().equalsIgnoreCase(type))
                 .collect(Collectors.toList());
     }
 
-    @Override
-    public List<ShopItem> getClothes() {
-        return webShopRepository.getItems().stream()
-                .filter(i -> i.getType().equalsIgnoreCase("CLOTHES AND SHOES"))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ShopItem> getElectronics() {
-        return webShopRepository.getItems().stream()
-                .filter(i -> i.getType().equalsIgnoreCase("ELECTRONICS"))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<ShopItem> getBeverages() {
-        return webShopRepository.getItems().stream()
-                .filter(i -> i.getType().equalsIgnoreCase("BEVERAGES AND SNACKS"))
-                .collect(Collectors.toList());
-    }
+//    @Override
+//    public List<ShopItem> getElectronics() {
+//        return webShopRepository.getItems().stream()
+//                .filter(i -> i.getType().equalsIgnoreCase("ELECTRONICS"))
+//                .collect(Collectors.toList());
+//    }
+//
+//    @Override
+//    public List<ShopItem> getBeverages() {
+//        return webShopRepository.getItems().stream()
+//                .filter(i -> i.getType().equalsIgnoreCase("BEVERAGES AND SNACKS"))
+//                .collect(Collectors.toList());
+//    }
 }

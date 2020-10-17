@@ -15,12 +15,12 @@ public interface WebShopService {
     Double getAverageStock();
     ShopItem getMostExpensive();
     List<ShopItem> getItemByName(String string);
+//
+//    List<ShopItem> getItemByType(String string);
 
-    List<ShopItem> getItemByType(String string);
+    List<ShopItem> getItemByType(String type);
 
-    List<ShopItem> getClothes();
-
-    List<ShopItem> getElectronics();
-
-    List<ShopItem> getBeverages();
+//    List<ShopItem> getElectronics();
+//
+//    List<ShopItem> getBeverages();
 }

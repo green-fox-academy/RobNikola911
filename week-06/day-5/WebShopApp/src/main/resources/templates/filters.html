@@ -11,9 +11,9 @@
     <h1><a th:href="@{/webshop/more-filters}" class="header">More >></a></h1>
 </div>
 <div>
-    <a th:href="@{/webshop/filter-clothesandshoes}" class="button"> CLOTHES AND SHOES</a>
-    <a th:href="@{/webshop/filter-electronics}" class="button"> ELECTRONICS</a>
-    <a th:href="@{/webshop/filter-beveragesandsnacks}" class="button"> BEVERAGES AND SNACKS</a>
+    <a th:href="@{/webshop/items(type='Clothes and Shoes')}" class="button"> CLOTHES AND SHOES</a>
+    <a th:href="@{/webshop/items(type='Electronics')}" class="button"> ELECTRONICS</a>
+    <a th:href="@{/webshop/items(type='Beverages and Snacks')}" class="button"> BEVERAGES AND SNACKS</a>
 <!--    <a th:href="@{/webshop/average-stock}" class="button"> EURO</a>-->
 <!--    <a th:href="@{/webshop/most-expensive}" class="button"> ORIGINAL CURRENCY</a>-->
 </div>
@@ -21,10 +21,10 @@
 <div>
 
 </div>
-<form th:action="@{/webshop/more-filters}" method="POST" name="search" id="search">
-    <label for="input1">Search for:</label>
-    <input type="text" class="form-control" placeholder="Search here for key word" name="text" id="input1">
-</form>
+<!--<form th:action="@{/webshop/more-filters}" method="POST" name="search" id="search">-->
+<!--    <label for="input1">Search for:</label>-->
+<!--    <input type="text" class="form-control" placeholder="Search here for key word" name="text" id="input1">-->
+<!--</form>-->
 <br>
 <table>
     <tr>
