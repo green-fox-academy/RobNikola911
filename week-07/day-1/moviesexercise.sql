@@ -1,0 +1,1 @@
+SELECT title FROM movie where director = 'Steven Spielberg';
