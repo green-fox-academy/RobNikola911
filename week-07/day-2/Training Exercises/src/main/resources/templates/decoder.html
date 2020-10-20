@@ -7,6 +7,16 @@
 </head>
 <body>
 <h3>Decoding text</h3>
+<div>
+    <form action="/useful/decoder" method="post">
+        <label >Insert Text to decode :</label><br>
+        <input type="text"  name="text"><br>
+        <label >Insert Number:</label><br>
+        <input type="number"  name="number">
+
+        <button type="submit"> Decode</button>
+    </form>
+</div>
 <p th:text="'Original text: ' + ${text}"></p>
 <p th:text="'Decoded text: '+ ${result}"></p>
 <a href="/useful">Home Page</a>

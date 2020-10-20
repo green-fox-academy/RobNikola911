@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
@@ -36,7 +37,23 @@ public class UtilityController {
         return "email";
     }
 
-    @GetMapping("/useful/encoder")
+
+//
+//    @GetMapping("/useful/decoder")
+//    public String ceasarDecoder(Model model, @RequestParam String text,
+//                                             @RequestParam int number){
+//        String decoded = utilityService.caesar(text, -number);
+//        model.addAttribute("text", text);
+//        model.addAttribute("result", decoded);
+//        return "decoder";
+//    }
+
+    @GetMapping("useful/encoder")
+    public String ceasarEncoder(){
+        return "encoder";
+    }
+
+    @PostMapping("/useful/encoder")
     public String ceasarEncoder(Model model, @RequestParam String text,
                                             @RequestParam int number){
         String encoded = utilityService.caesar(text, number);
@@ -45,14 +62,21 @@ public class UtilityController {
         return "encoder";
     }
 
-    @GetMapping("/useful/decoder")
+    @GetMapping("useful/decoder")
+    public String ceasarDecoder(){
+        return "decoder";
+    }
+
+    @PostMapping("/useful/decoder")
     public String ceasarDecoder(Model model, @RequestParam String text,
-                                             @RequestParam int number){
+                                @RequestParam int number){
         String decoded = utilityService.caesar(text, -number);
         model.addAttribute("text", text);
         model.addAttribute("result", decoded);
         return "decoder";
     }
+
+
 
 
 // ## Caesar encoder/decoder

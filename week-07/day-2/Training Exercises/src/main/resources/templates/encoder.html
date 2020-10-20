@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <h3>Encoding text</h3>
+<div>
+    <form action="/useful/encoder" method="post">
+        <label >Insert Text to encode :</label><br>
+        <input type="text"  name="text"><br>
+        <label >Insert Number:</label><br>
+        <input type="number"  name="number">
+
+        <button type="submit"> Encode</button>
+    </form>
+</div>
 <p th:text="'Original text: ' + ${text}"></p>
 <p th:text="'Encoded text: '+ ${result}"></p>
 <a href="/useful">Home Page</a>
