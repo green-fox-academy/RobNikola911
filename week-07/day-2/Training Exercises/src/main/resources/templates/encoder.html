@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1 th:text="${encoder}"></h1>
-<p th:if="${encoder}" th:text="${'Is a valid email address'}" style="color:green"></p>
-<p th:unless="${encoder}" th:text="${'Not a valid email address'}" style="color:red"></p>
-
+<h3>Encoding text</h3>
+<p th:text="'Original text: ' + ${text}"></p>
+<p th:text="'Encoded/decoded text: '+ ${result}"></p>
+<a href="/useful">Home Page</a>
 </body>
 </html>

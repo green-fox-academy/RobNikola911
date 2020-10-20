@@ -37,16 +37,20 @@ public class UtilityController {
     }
 
     @GetMapping("/useful/encoder")
-    public String ceasarEncoder(Model model, @RequestParam(value = "encoder", required = false) String text,
+    public String ceasarEncoder(Model model, @RequestParam String text,
                                             @RequestParam int number){
-        model.addAttribute("encoder", utilityService.caesar("abc", 1));
+        String encoded = utilityService.caesar(text, number);
+        model.addAttribute("text", text);
+        model.addAttribute("result", encoded);
         return "encoder";
     }
 
     @GetMapping("/useful/decoder")
-    public String ceasarDecoder(Model model, @RequestParam(value = "decoder", required = false) String text,
+    public String ceasarDecoder(Model model, @RequestParam String text,
                                              @RequestParam int number){
-        model.addAttribute("decoder", utilityService.caesar("abc", 1));
+        String decoded = utilityService.caesar(text, -number);
+        model.addAttribute("text", text);
+        model.addAttribute("result", decoded);
         return "decoder";
     }
 
