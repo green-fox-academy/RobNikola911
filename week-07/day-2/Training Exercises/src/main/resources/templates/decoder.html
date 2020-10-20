@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Decoder</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h1 th:text="${decoder}"></h1>
+<p th:if="${decoder}" th:text="${'Is a valid email address'}" style="color:green"></p>
+<p th:unless="${decoder}" th:text="${'Not a valid email address'}" style="color:red"></p>
+
+</body>
+</html>

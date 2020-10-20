@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<table>
+    <tr>
+        <th><a th:href="@{/useful}">Link to random colors</a></th>
+    </tr>
+    <tr th:each="color : ${random}">
+        <td th:text="${random}"></td>
+    </tr>
+
+    <tr>
+        <th><a th:href="@{/useful}">Link to caesar</a></th>
+    </tr>
+    <tr th:each="color : ${caesar}">
+        <td th:text="${caesar}"></td>
+    </tr>
+</table>
+
+<h2><a th:href="@{/useful/colored}">Change to Colored Background</a></h2>
+<h2><a th:href="@{/useful/email?email=is@this.valid}">Link to Email</a></h2>
+<h2><a th:href="@{/useful/encoder}">Link to Encoder</a></h2>
+<h2><a th:href="@{/useful/decoder}">Link to Decoder</a></h2>
+
+</body>
+</html>
