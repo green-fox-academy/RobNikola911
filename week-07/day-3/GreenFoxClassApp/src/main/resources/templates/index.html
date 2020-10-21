@@ -8,9 +8,10 @@
 <body>
 <h3><a href="/gfa">Home Page</a></h3>
 <h4><a th:href="@{/gfa/list}">List all students</a></h4>
-<ul th:each="student : ${students}"></ul>
-    <li th:text="${students}"></li>
 
+<ul th:each="student : ${students}">
+    <li th:text="${student}"></li>
+</ul>
 
 </body>
 </html>
