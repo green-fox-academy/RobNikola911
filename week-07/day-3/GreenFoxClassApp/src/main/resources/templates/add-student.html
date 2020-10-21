@@ -9,15 +9,11 @@
 <h3><a href="/gfa">Home Page</a></h3>
 <p>Number of students:</p>
 <p th:text="${count}"></p>
-<h4><a th:href="@{/gfa/list}">List all students</a></h4>
-<h4><a th:href="@{/gfa/add}">Add new student</a></h4>
-<h4><a th:href="@{/gfa/check}">Check the student</a></h4>
-
-
-
-<ul th:each="student : ${students}">
-    <li th:text="${student}"></li>
-</ul>
+<form action="/gfa/save" method="post">
+    <label>Name: </label>
+    <input type="text" name="name" required>
+    <input type="submit" name="submit" value="Add a new student">
+</form>
 
 
 </body>

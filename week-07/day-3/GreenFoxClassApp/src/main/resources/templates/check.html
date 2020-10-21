@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<h3><a href="/gfa">Home Page</a></h3>
+<p>Number of students:</p>
+<p th:text="${count}"></p>
+
+<form action="/gfa/check" method="post">
+    <label>Name to check: </label>
+    <input type="text" name="name" required th:value="${name}"><br>
+    <button type="submit"> Submit </button>
+</form>
+<p th:if="${checked}">Name is in the list</p>
+<p th:unless="${checked}">Name is not in the list</p>
+</body>
+</html>

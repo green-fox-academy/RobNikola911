@@ -23,4 +23,15 @@ public class StudentService {
     public void save(String student) {
         names.add(student);
     }
+
+    public Integer count(){
+        return names.size();
+    }
+
+    public Boolean checker(String name){
+        if (names.contains(name)){
+            return true;
+        }
+        return false;
+    }
 }
