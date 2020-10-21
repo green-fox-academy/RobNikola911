@@ -1,7 +1,6 @@
 package com.exercise.messageservice.services;
 
-
 public interface MessageService {
 
-    public void sendMessage(String msg);
+    public void sendMessage(String email, String emailContent);
 }

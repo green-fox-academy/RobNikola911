@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Primary
 public class MessageProceeder {
 
-
     private MessageService messageService;
 
     @Autowired
@@ -17,11 +16,11 @@ public class MessageProceeder {
         this.messageService = messageService;
     }
 
-    public void setMessageService(MessageService messageService){
+    public void setMessageService(MessageService messageService) {
         this.messageService = messageService;
     }
 
     public void processMessage(String message, String email) {
-
+        messageService.sendMessage(email, message);
     }
 }

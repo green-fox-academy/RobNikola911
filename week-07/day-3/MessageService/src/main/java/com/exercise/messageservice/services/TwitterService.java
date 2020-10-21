@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 public class TwitterService implements MessageService{
 
     @Override
-    public void sendMessage(String msg) {
-        System.out.println(msg);
+    public void sendMessage(String email, String emailContent) {
+        System.out.println("Twitter Sent to " + email + " with Message=" + emailContent);
     }
 }
