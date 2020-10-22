@@ -23,12 +23,10 @@ public class MainController {
 
     @GetMapping("/")
     public String home(@RequestParam (required = false) String name, Model model){
-        if (name == null){
-            return "index";
-        }
         if (!foxService.checkFox(name)){
             return "redirect:/login";
         }
+        model.addAttribute("name", name);
         model.addAttribute("fox", loginService.getFox(name));
         return "index";
     }

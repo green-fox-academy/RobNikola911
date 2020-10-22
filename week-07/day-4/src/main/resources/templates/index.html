@@ -7,11 +7,11 @@
 </head>
 <body>
 <!--<div th:replace="~{fragments/toplinks(${name})}"></div>-->
-<div th:replace="~{fragments/toplinks}"></div>
+<div th:replace="~{fragments/toplinks(${name})}"></div>
 
 
 <img th:src="@{greenfox.png}" alt="greenfox">
-<div id="ifFoxIsPresent" th:if="${fox}">
+<!--<div id="ifFoxIsPresent" th:if="${fox}">-->
 <p th:text="'This is ' + ${fox.getName()} + ' Currently living on '+
 ${fox.getFood()}+ ' and '+${fox.getDrink()}+ '. He knows ' + ${fox.getTricks().size()}
 + ' tricks.'"></p>
@@ -21,11 +21,9 @@ ${fox.getFood()}+ ' and '+${fox.getDrink()}+ '. He knows ' + ${fox.getTricks().s
             th:style="|color:black|"></li>
         <li th:unless="${fox.getTricks().size() == 0}" th:text="${fox.getTricks()}" ></li>
     </ul>
-</div>
-<div id="ifFoxNotPresent" th:unless="${fox}">
 
+<!--<div id="ifFoxNotPresent" th:unless="${fox}">-->
+<!--    <p>There is not fox logged in. Proceed with Login please.</p>-->
 
-
-</div>
 </body>
 </html>

@@ -31,4 +31,5 @@ public class LoginServiceImpl implements LoginService {
                 .filter(fox -> fox.getName().equalsIgnoreCase(name))
                 .findAny().orElse(new Fox("Mr. Green."));
     }
+
 }
