@@ -11,7 +11,7 @@
 </ul>
 
 <img th:src="@{greenfox.png}" alt="greenfox">
-<p>This is Mr.Fox. Currently living on pizza and lemonade. He knows 2 tricks.</p>
+<p th:text="'This is ' + ${name?: 'Mr.Fox.'} + ' Currently living on pizza and lemonade. He knows 2 tricks.'"></p>
 
 <h2>Known tricks</h2>
 <ul>

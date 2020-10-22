@@ -4,6 +4,7 @@ import com.robnikola.programmerfoxclub.models.Fox;
 
 import java.util.List;
 
-public interface LoginService {
-    void addFox(String name);
+public interface FoxService {
+    Fox getFoxByName(String name);
+    List<Fox> getAllFoxes();
 }

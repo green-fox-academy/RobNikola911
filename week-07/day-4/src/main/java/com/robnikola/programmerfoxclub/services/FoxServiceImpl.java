@@ -1,0 +1,32 @@
+package com.robnikola.programmerfoxclub.services;
+
+import com.robnikola.programmerfoxclub.models.Fox;
+import com.robnikola.programmerfoxclub.repositories.FoxRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class FoxServiceImpl implements FoxService{
+
+    private final FoxRepository foxRepository;
+
+    public FoxServiceImpl(FoxRepository foxRepository) {
+        this.foxRepository = foxRepository;
+    }
+
+    @Override
+    public Fox getFoxByName(String name) {
+        Optional<Fox> optionalFox = foxRepository.getFoxes().stream()
+                .filter(fox -> fox.getName().equals(name))
+                .findAny();
+
+        return optionalFox.orElse(null);
+    }
+
+    @Override
+    public List<Fox> getAllFoxes() {
+        return foxRepository.getFoxes();
+    }
+}
