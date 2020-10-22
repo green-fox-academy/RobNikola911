@@ -6,14 +6,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<div th:replace="~{fragments/toplinks}"></div>
 <h2>Welcome to Programmer Fox Club!</h2>
-
-<p>Please provide a name, so you can associate it to your pet!</p>
 
 <div>
     <form action="/login" method="post">
-        <label >Please provide a name, so you can associate it to your pet!</label><br>
-        <input type="name"  name="name">
+        <label for="name">Please provide a name, so you can associate it to your pet!</label><br>
+        <input type="name"  name="name" id="name">
         <button type="submit"> GO</button>
     </form>
 </div>

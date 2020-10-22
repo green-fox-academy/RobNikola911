@@ -6,17 +6,26 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<ul>
-    <li><a href="/gfa">Information</a></li>
-</ul>
+<!--<div th:replace="~{fragments/toplinks(${name})}"></div>-->
+<div th:replace="~{fragments/toplinks}"></div>
+
 
 <img th:src="@{greenfox.png}" alt="greenfox">
-<p th:text="'This is ' + ${name?: 'Mr.Fox.'} + ' Currently living on pizza and lemonade. He knows 2 tricks.'"></p>
+<div id="ifFoxIsPresent" th:if="${fox}">
+<p th:text="'This is ' + ${fox.getName()} + ' Currently living on '+
+${fox.getFood()}+ ' and '+${fox.getDrink()}+ '. He knows ' + ${fox.getTricks().size()}
++ ' tricks.'"></p>
+    <h2>Known tricks</h2>
+    <ul>
+        <li th:if="${fox.getTricks().size() == 0}" th:text="${'You do not know any tricks yet. Go learn some!'}"
+            th:style="|color:black|"></li>
+        <li th:unless="${fox.getTricks().size() == 0}" th:text="${fox.getTricks()}" ></li>
+    </ul>
+</div>
+<div id="ifFoxNotPresent" th:unless="${fox}">
 
-<h2>Known tricks</h2>
-<ul>
-    <li>write HTML</li>
-    <li>code in Java</li>
-</ul>
+
+
+</div>
 </body>
 </html>

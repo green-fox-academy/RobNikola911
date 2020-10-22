@@ -5,27 +5,28 @@ import java.util.List;
 
 public class Fox {
     private String name;
-    private List<Tricks> tricks;
-    private String food;
-    private String drink;
+    private List<Trick> tricks;
+    private Food food;
+    private Drink drink;
 
     public Fox(String name) {
         this.name = name;
-        this.food = "Pizza";
-        this.drink = "Cola";
+        this.food = Food.SALAD;
+        this.drink = Drink.WATER;
         this.tricks = new ArrayList<>();
+//        tricks.add(Trick.CSS);
     }
 
-    public Fox(String name, List<Tricks> tricks, String food, String drink) {
+    public Fox(String name, List<Trick> tricks, Food food, Drink drink) {
         this.name = name;
         if (tricks == null) {
             this.tricks = new ArrayList<>();
+        } else {
+            this.tricks = tricks;
         }
         this.food = food;
         this.drink = drink;
-        this.tricks = tricks;
     }
-
 
     public String getName() {
         return name;
@@ -35,30 +36,27 @@ public class Fox {
         this.name = name;
     }
 
-    public List<Tricks> getTricks() {
+    public List<Trick> getTricks() {
         return tricks;
     }
 
-    public void setTricks(List<Tricks> tricks) {
+    public void setTricks(List<Trick> tricks) {
         this.tricks = tricks;
     }
 
-    public String getFood() {
+    public Food getFood() {
         return food;
     }
 
-    public void setFood(String food) {
+    public void setFood(Food food) {
         this.food = food;
     }
 
-    public String getDrink() {
+    public Drink getDrink() {
         return drink;
     }
 
-    public void setDrink(String drink) {
+    public void setDrink(Drink drink) {
         this.drink = drink;
-    }
-    public void addTricks(Tricks trick){
-        tricks.add(trick);
     }
 }

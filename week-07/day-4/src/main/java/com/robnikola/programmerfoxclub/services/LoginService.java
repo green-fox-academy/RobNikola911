@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface LoginService {
     void addFox(String name);
+    Fox getFox(String name);
 }

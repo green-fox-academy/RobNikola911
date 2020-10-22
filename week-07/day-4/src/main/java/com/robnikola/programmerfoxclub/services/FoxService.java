@@ -7,4 +7,5 @@ import java.util.List;
 public interface FoxService {
     Fox getFoxByName(String name);
     List<Fox> getAllFoxes();
+    boolean checkFox(String name);
 }

@@ -29,4 +29,12 @@ public class FoxServiceImpl implements FoxService{
     public List<Fox> getAllFoxes() {
         return foxRepository.getFoxes();
     }
+
+    @Override
+    public boolean checkFox(String name) {
+        Optional<Fox> stringOptional = foxRepository.getFoxes().stream()
+                .filter(fox -> fox.getName().equalsIgnoreCase(name))
+                .findAny();
+        return stringOptional.isPresent();
+    }
 }

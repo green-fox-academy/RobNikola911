@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nutrition Store</title>
+</head>
+<body>
+<div th:replace="~{fragments/toplinks}"></div>
+<form th:action="@{/nutritionstore}" method="post">
+    <label for="food">Food: </label>
+    <select id="food" name="food">
+        <option th:each="f : ${foodList}" th:value="${f}" th:text="${f}" th:selected="${fox.getFood()}"/>
+    </select>
+    <label for="drink">Drink: </label>
+    <select id="drink" name="drink">
+        <option th:each="d : ${drinkList}" th:value="${d}" th:text="${d}" th:selected="${fox.getDrink()}"/>
+    </select>
+    <button type="submit">Change</button>
+    <input type="hidden" name="name" th:value="${fox.getName()}">
+</form>
+
+</body>
+</html>

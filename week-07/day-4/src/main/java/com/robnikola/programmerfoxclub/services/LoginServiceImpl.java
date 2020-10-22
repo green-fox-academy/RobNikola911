@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 
     private final FoxRepository foxRepository;
 
@@ -23,5 +23,12 @@ public class LoginServiceImpl implements LoginService{
         if (optionalName.isEmpty()) {
             foxRepository.addFox(name);
         }
+    }
+
+    @Override
+    public Fox getFox(String name) {
+        return foxRepository.getFoxes().stream()
+                .filter(fox -> fox.getName().equalsIgnoreCase(name))
+                .findAny().orElse(new Fox("Mr. Green."));
     }
 }
