@@ -1,9 +1,6 @@
 package com.robnikola.programmerfoxclub.services;
 
-import com.robnikola.programmerfoxclub.models.Drink;
-import com.robnikola.programmerfoxclub.models.Food;
-import com.robnikola.programmerfoxclub.models.Fox;
-import com.robnikola.programmerfoxclub.models.Trick;
+import com.robnikola.programmerfoxclub.models.*;
 
 import java.util.List;
 
@@ -16,4 +13,5 @@ public interface FoxService {
     void setTrick(String name, Trick trick);
     List<Trick> getPossibleTricksToLearn(String name);
     boolean learnedAll(String name);
+    List<Action> getActionList(Fox name);
 }

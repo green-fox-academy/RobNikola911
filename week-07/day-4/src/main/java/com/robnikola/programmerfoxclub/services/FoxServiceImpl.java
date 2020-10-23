@@ -1,19 +1,16 @@
 package com.robnikola.programmerfoxclub.services;
 
-import com.robnikola.programmerfoxclub.models.Drink;
-import com.robnikola.programmerfoxclub.models.Food;
-import com.robnikola.programmerfoxclub.models.Fox;
-import com.robnikola.programmerfoxclub.models.Trick;
+import com.robnikola.programmerfoxclub.models.*;
 import com.robnikola.programmerfoxclub.repositories.FoxRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
 public class FoxServiceImpl implements FoxService{
+
+    List<Action> actionList = new ArrayList<>();
 
     private final FoxRepository foxRepository;
 
@@ -45,18 +42,37 @@ public class FoxServiceImpl implements FoxService{
 
     @Override
     public void setFood(String name, Food food) {
-        getFoxByName(name).setFood(food);
+        Fox currentFox = getFoxByName(name);
+        Food before = currentFox.getFood();
+        currentFox.setFood(food);
+        Food after = currentFox.getFood();
+        Action action = new Action(new Date(),currentFox,
+                "Food has been changed from: "+before+ " to "+after);
+
+        actionList.add(action);
+
     }
 
     @Override
     public void setDrink(String name, Drink drink) {
-        getFoxByName(name).setDrink(drink);
+        Fox currentFox = getFoxByName(name);
+        Drink before = currentFox.getDrink();
+        currentFox.setDrink(drink);
+        Drink after = currentFox.getDrink();
+        Action action = new Action(new Date(),currentFox,
+                "Drink has been changed from: "+before+ " to "+after);
+
+        actionList.add(action);
     }
 
     @Override
     public void setTrick(String name, Trick trick) {
-//      getFoxByName(name).removeTrick(trick);
-        getFoxByName(name).addTrick(trick);
+        Fox currentFox = getFoxByName(name);
+        currentFox.addTrick(trick);
+        Action action = new Action(new Date(),currentFox,
+                "Learned: "+ trick);
+
+        actionList.add(action);
     }
 
     @Override
@@ -73,5 +89,12 @@ public class FoxServiceImpl implements FoxService{
         if (getPossibleTricksToLearn(name).isEmpty()){
             return true;
         } return false;
+    }
+
+    public List<Action> getActionList (Fox name) {
+        actionList.stream()
+                .filter(action -> (action.getFox().getName().equals(name.getName())))
+                .collect(Collectors.toList());
+        return actionList;
     }
 }

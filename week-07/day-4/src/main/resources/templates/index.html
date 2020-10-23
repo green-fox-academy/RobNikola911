@@ -24,8 +24,9 @@ ${fox.getFood()}+ ' and '+${fox.getDrink()}+ '. He knows ' + ${fox.getTricks().s
     </ul>
 
     <h2>Action History</h2>
-<ul>
-    <li>No actions yet!</li>
+<p th:if="${listSize} == 0">No actions have been made, yet.</p>
+<ul th:unless="${listSize} == 0">
+    <li th:each= "action: ${actions}" th:text="${action}"></li>
 </ul>
 <!--<div id="ifFoxNotPresent" th:unless="${fox}">-->
 <!--    <p>There is not fox logged in. Proceed with Login please.</p>-->

@@ -14,8 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.text.SimpleDateFormat;
+
 @Controller
 public class FoxController {
+
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy. MMMM dd. HH:mm:ss");
 
     private LoginService loginService;
     private FoxService foxService;
@@ -67,6 +71,8 @@ public class FoxController {
     public String getActionHistory(@RequestParam String name, Model model){
         model.addAttribute("fox", loginService.getFox(name));
         model.addAttribute("name", name);
+//        model.addAttribute("actions", foxService.getActionList());
+//        model.addAttribute("listSize", foxService.getActionList().size());
         return "index";
     }
 
