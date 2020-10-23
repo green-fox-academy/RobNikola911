@@ -19,9 +19,14 @@ ${fox.getFood()}+ ' and '+${fox.getDrink()}+ '. He knows ' + ${fox.getTricks().s
     <ul>
         <li th:if="${fox.getTricks().size() == 0}" th:text="${'You do not know any tricks yet. Go learn some!'}"
             th:style="|color:black|"></li>
-        <li th:unless="${fox.getTricks().size() == 0}" th:text="${fox.getTricks()}" ></li>
+        <li th:unless="${fox.getTricks().size() == 0}" th:each="t : ${fox.getTricks()}"
+            th:text="${t}" ></li>
     </ul>
 
+    <h2>Action History</h2>
+<ul>
+    <li>No actions yet!</li>
+</ul>
 <!--<div id="ifFoxNotPresent" th:unless="${fox}">-->
 <!--    <p>There is not fox logged in. Proceed with Login please.</p>-->
 

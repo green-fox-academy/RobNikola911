@@ -30,7 +30,6 @@ public class FoxController {
     public void addFoodDrinkAndTrickList(Model model) {
         model.addAttribute("foodList", Food.values());
         model.addAttribute("drinkList", Drink.values());
-        model.addAttribute("trickList", Trick.values());
     }
 
     @GetMapping("/nutritionStore")
@@ -49,5 +48,26 @@ public class FoxController {
         return "redirect:/?name="+name;
     }
 
+    @GetMapping("/trickCenter")
+    public String getTrickCenter(@RequestParam String name, Model model){
+        model.addAttribute("fox", loginService.getFox(name));
+        model.addAttribute("name", name);
+        model.addAttribute("trickList", foxService.getPossibleTricksToLearn(name));
+        model.addAttribute("learned", foxService.learnedAll(name));
+        return "trick-center";
+    }
+
+    @PostMapping("/trickCenter")
+    public String postTrickCenter(@RequestParam Trick trick, @RequestParam String name) {
+        foxService.setTrick(name, trick);
+        return "redirect:/?name="+name;
+    }
+
+    @GetMapping("/actionHistory")
+    public String getActionHistory(@RequestParam String name, Model model){
+        model.addAttribute("fox", loginService.getFox(name));
+        model.addAttribute("name", name);
+        return "index";
+    }
 
 }

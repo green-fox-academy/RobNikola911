@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trick Center</title>
+</head>
+<body>
+<div th:replace="~{fragments/toplinks(${name})}"></div>
+<h4 th:if="${learned}" th:text="${fox.getName()} + ' learned all the tricks'"></h4>
+<form th:unless="${learned}" th:action="@{/trickCenter(name=${name})}" method="post">
+    <label for="trick">Trick: </label>
+    <select id="trick" name="trick">
+        <option th:each="t : ${trickList}" th:value="${t}" th:text="${t}" th:selected="${fox.getTricks()}"></option>
+    </select>
+    <button type="submit">Learn new Trick</button>
+</form>
+</body>
+</html>

@@ -59,4 +59,10 @@ public class Fox {
     public void setDrink(Drink drink) {
         this.drink = drink;
     }
+
+    public void addTrick(Trick trick) {
+        if (tricks.contains(trick))
+            return;
+        tricks.add(trick);
+    }
 }
