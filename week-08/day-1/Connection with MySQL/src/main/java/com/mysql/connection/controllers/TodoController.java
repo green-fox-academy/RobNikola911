@@ -1,12 +1,11 @@
 package com.mysql.connection.controllers;
 
-import com.listingtodos.embeddeddb.repositories.TodoRepository;
+import com.mysql.connection.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 
 @Controller("/todo")
 public class TodoController {

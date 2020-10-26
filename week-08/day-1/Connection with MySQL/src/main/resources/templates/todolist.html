@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+</head>
+<body>
+<h1>TODOS FOR TODAY: </h1>
+
+<!--<ul th:if="${todos.size() > 0}" th:each="item : ${todos}">-->
+<!--    <li th:text="${item.getTitle()}"></li>-->
+<!--</ul>-->
+<!--<p th:unless="${todos.size() > 0}"> You dont have items yet.</p>-->
+
+
+<table>
+    <tr>
+        <th>Id: </th>
+        <th>Title: </th>
+        <th>Urgent: </th>
+        <th>Done: </th>
+    </tr>
+    <tr th:if="${todos.size() > 0}" th:each="element : ${todos}">
+        <td th:text="${element.id}"></td>
+        <td th:text="${element.title}"></td>
+        <td th:text="${element.urgent}"></td>
+        <td th:text="${element.done}"></td>
+    </tr>
+</table>
+<p th:unless="${todos.size() > 0}"> You dont any todos yet.</p>
+
+</body>
+</html>
