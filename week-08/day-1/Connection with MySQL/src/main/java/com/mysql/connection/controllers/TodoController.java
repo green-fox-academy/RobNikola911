@@ -1,4 +1,4 @@
-package com.listingtodos.embeddeddb.controllers;
+package com.mysql.connection.controllers;
 
 import com.listingtodos.embeddeddb.repositories.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
