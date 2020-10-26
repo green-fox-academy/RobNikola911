@@ -7,15 +7,7 @@
 <body>
 <h1>TODOS FOR TODAY: </h1>
 
-<ul>
-    <li><a href="/add">Add new todo</a></li>
-</ul>
-
-<!--<ul th:if="${todos.size() > 0}" th:each="item : ${todos}">-->
-<!--    <li th:text="${item.getTitle()}"></li>-->
-<!--</ul>-->
-<!--<p th:unless="${todos.size() > 0}"> You dont have items yet.</p>-->
-
+<a href="/todo/add">Add new todo</a>
 
 <table>
     <tr>
@@ -29,8 +21,15 @@
         <td th:text="${element.title}"></td>
         <td th:text="${element.urgent}"></td>
         <td th:text="${element.done}"></td>
+        <td>
+            <a th:href="|/todo/${element.getId()}/delete|">delete</a>
+        </td>
+        <td>
+            <a th:href="|/todo/${element.getId()}/edit|">edit</a>
+        </td>
     </tr>
 </table>
+
 <p th:unless="${todos.size() > 0}"> You dont any todos yet.</p>
 
 </body>
