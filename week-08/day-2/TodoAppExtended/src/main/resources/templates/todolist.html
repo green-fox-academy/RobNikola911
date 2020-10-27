@@ -8,6 +8,16 @@
 <h1>TODOS FOR TODAY: </h1>
 
 <a href="/todo/add">Add new todo</a>
+<br>
+<a href="/assignee">List of Assignees</a>
+
+<form th:action="@{/todo/search}" method="POST">
+    <label>Search: </label>
+    <input type="text" placeholder="Search here" name="search_term">
+
+    <label> by: </label>
+    <input type="submit" name="search_by" value="Title">
+</form>
 
 <table>
     <tr>
@@ -16,16 +26,16 @@
         <th>Urgent: </th>
         <th>Done: </th>
     </tr>
-    <tr th:if="${todos.size() > 0}" th:each="element : ${todos}">
-        <td th:text="${element.id}"></td>
-        <td th:text="${element.title}"></td>
-        <td th:text="${element.urgent}"></td>
-        <td th:text="${element.done}"></td>
+    <tr th:if="${todos.size() > 0}" th:each="todo : ${todos}">
+        <td th:text="${todo.getId()}"></td>
+        <td th:text="${todo.getTitle()}"></td>
+        <td th:text="${todo.getUrgent()}"></td>
+        <td th:text="${todo.getDone()}"></td>
         <td>
-            <a th:href="|/todo/${element.getId()}/delete|">delete</a>
+            <a th:href="|/todo/${todo.getId()}/delete|">delete</a>
         </td>
         <td>
-            <a th:href="|/todo/${element.getId()}/edit|">edit</a>
+            <a th:href="|/todo/${todo.getId()}/edit|">edit</a>
         </td>
     </tr>
 </table>

@@ -21,11 +21,5 @@ public class ConnectionApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        todoRepository.save(new Todo("daily task", false, false));
-        todoRepository.save(new Todo("make the beds", true, true));
-        todoRepository.save(new Todo("do the washing up", true, false));
-        todoRepository.save(new Todo("mop", true, true));
-        todoRepository.save(new Todo("broom", true, false));
-        todoRepository.save(new Todo("tidy up", false, false));
     }
 }
