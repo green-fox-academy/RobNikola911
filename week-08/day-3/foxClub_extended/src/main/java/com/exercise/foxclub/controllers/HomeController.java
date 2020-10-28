@@ -42,7 +42,7 @@ public class HomeController {
         model.addAttribute("fox", foxService.findById(activeFoxId));
         model.addAttribute("user", user);
         model.addAttribute("actionHistoryLogger", logger);
-        sessionService.updateFoxAndNutrition();
+//        sessionService.updateFoxAndNutrition();
         return "index";
     }
 

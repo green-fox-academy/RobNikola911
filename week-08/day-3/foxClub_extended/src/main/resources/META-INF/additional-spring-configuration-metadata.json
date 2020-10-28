@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "spring.logging.level.org.hibernate.SQL",
+      "type": "java.lang.String",
+      "description": "Description for spring.logging.level.org.hibernate.SQL."
+    },
+    {
+      "name": "spring.session.story.type",
+      "type": "java.lang.String",
+      "description": "Description for spring.session.story.type."
+    }
+  ] }
