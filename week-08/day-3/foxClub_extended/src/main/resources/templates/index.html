@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+
+<div th:replace="~{fragments/toplinks(${fox}? ${fox.name} : 'null')}">
+</div>
+
+<img th:src="@{greenfox.png}" alt="A green fox">
+<div id="foxPresent" th:if="${fox}" >
+    <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food.label} + ' and ' + ${fox.drink.label} + '. ' + ${#strings.capitalize(fox.gender)} + ' knows ' + ${#lists.size(fox.tricks)} + ' tricks.'"></p>
+    <h1>Known tricks</h1>
+    <ul th:unless="${#lists.size(fox.tricks)>0}">You know no tricks yet. Go learn something you lazy fox!</ul>
+    <ul>
+        <li th:each="trick : ${fox.tricks}" th:text="${trick.label}"></li>
+    </ul>
+</div>
+<div id="foxNotPresent" th:unless="${fox}">
+    <p>This is Mr. Fox. Currently living on pizza and lemonade. He knows 2 tricks.</p>
+    <h1>Known tricks</h1>
+    <ul>
+        <li>write HTML</li>
+        <li>code in Java</li>
+    </ul>
+</div>
+
+<h1>Action history</h1>
+<ul>
+    <li th:each="action : ${actionHistory}" th:text="${action}"></li>
+</ul>
+
+
+</body>
+</html>

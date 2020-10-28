@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+<h1>Welcome to Programmer Fox Club</h1>
+<p th:if="${invalidName}" style="color: red">You have provided a name that has not been used before,
+    add it as a new one!</p>
+<p th:if="${notLoggedIn}" style="color: red">First you need to log in a pet name!</p>
+<p>Please provide a name, so you can associate it to your pet!</p>
+<form action="/login" method="post">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name">
+    <label for="gender">Gender</label>
+    <select name="gender" id="gender">
+        <option th:each="gender : ${T(com.exercise.foxclub.models.Gender).values()}"
+                th:value="${gender}" th:text="${#strings.capitalize(gender.label)}"></option>
+    </select>
+    <button type="submit">GO</button>
+</form>
+
+</body>
+</html>
