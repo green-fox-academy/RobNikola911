@@ -28,7 +28,7 @@
 
             <td th:if="${account.animalType} == 'King'" th:text="'Yes'" ></td>
             <td th:unless="${account.animalType} == 'King'" th:text="'No'" ></td>
-            <td th:text="(${accountStat.index} % 3 != 0 or ${account.name} == 'Simba') ? ('Good one') : ('Bad one')" ></td>
+            <td th:text="(${accountStat.index} % 2 != 0 or ${account.name} == 'Simba') ? ('Good one') : ('Bad one')" ></td>
         </tr>
     </table>
 </div>
