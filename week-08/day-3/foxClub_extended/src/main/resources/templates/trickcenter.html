@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trick Center</title>
+    <link rel="stylesheet" href="/styles/style.css">
+</head>
+<body>
+<div th:replace="fragments/navigation :: copy"></div>
+<div class="content">
+    <div class="select-menu">
+        <form th:class="${fox.color}" th:action="@{/tricksave}" th:method="post" >
+            <label for="trick">Trick</label>
+            <select id="trick" name="trick" class="select-menu">
+                <option th:each="trick : ${tricklist}"  th:value="|${trick.id}|" th:utext="|${trick.name}|"></option>
+            </select>
+            <button th:type="submit">Learn</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

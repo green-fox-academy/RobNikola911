@@ -1,38 +1,94 @@
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>HOME</title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 <body>
-
-<div th:replace="~{fragments/toplinks(${fox}? ${fox.name} : 'null')}">
-</div>
-
-<img th:src="@{greenfox.png}" alt="A green fox">
-<div id="foxPresent" th:if="${fox}" >
-    <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food.label} + ' and ' + ${fox.drink.label} + '. ' + ${#strings.capitalize(fox.gender)} + ' knows ' + ${#lists.size(fox.tricks)} + ' tricks.'"></p>
+<div th:replace="fragments/navigation :: copy"></div>
+<div th:class="|fox-info-container content ${fox.color}|">
+    <div class="fox_info">
+        <div class="avatar">
+            <img th:src="@{'/img/' + ${fox.color} + 'fox.png'}" alt="greenfox" height="256" width="256">
+        </div>
+        <div class="fox_details">
+            <h1 th:text="${fox.name}"></h1>
+            <p th:if="${healMessage} != null" th:text="${healMessage}" style="color: red;"></p>
+            <div class="stats">
+                <p th:text="|Born: ${fox.birthDayString}|"></p>
+                <span th:text="|Health points: ${fox.healthPoints}| + ' %'" th:remove="tag"></span>
+                <a th:href="@{/fox/heal}">(heal)</a>
+                <p th:text="|Food level: ${fox.food.level}| + ' / ' + ${fox.food.getMAX_LEVEL()}"></p>
+                <p th:text="|Drink level: ${fox.drink.level}| + ' / ' + ${fox.drink.getMAX_LEVEL()}"></p>
+                <p th:text="|Hunger level: ${fox.hungerLevel}| + ' / ' + ${fox.MAX_HUNGER_LEVEL}"></p>
+                <p th:text="|Thirst level: ${fox.thirstLevel}| + ' / ' + ${fox.MAX_THIRST_LEVEL}"></p>
+            </div>
+        </div>
+    </div>
+    <div class="fox-infos">
+        <p th:text="'This is ' + ${fox.name} + '. Currently living on ' + ${fox.food.name} + ' and ' + ${fox.drink.name} + '. He knows ' + ${fox.trick_list.size()} + ' trick(s).'"></p>
+    </div>
     <h1>Known tricks</h1>
-    <ul th:unless="${#lists.size(fox.tricks)>0}">You know no tricks yet. Go learn something you lazy fox!</ul>
-    <ul>
-        <li th:each="trick : ${fox.tricks}" th:text="${trick.label}"></li>
-    </ul>
+    <div class="tricklist">
+        <ul th:each="trick : ${fox.trick_list}">
+            <li th:text="${trick.name}"></li>
+        </ul>
+    </div>
+    <h1>Action history</h1>
+    <div class="actionlist">
+        <p th:if="${fox.trick_list.size()} == null">No tricks.</p>
+        <ul th:if="${actionHistoryLogger.actionList.size()} != 0 and ${actionHistoryLogger.actionList} != null" th:each="action : ${actionHistoryLogger.getLastFiveAction()}">
+            <li th:text="${action}"></li>
+        </ul>
+        <span th:unless="${actionHistoryLogger.actionList.size()} != 0">No actions so far.</span>
+    </div>
 </div>
-<div id="foxNotPresent" th:unless="${fox}">
-    <p>This is Mr. Fox. Currently living on pizza and lemonade. He knows 2 tricks.</p>
-    <h1>Known tricks</h1>
-    <ul>
-        <li>write HTML</li>
-        <li>code in Java</li>
-    </ul>
-</div>
-
-<h1>Action history</h1>
-<ul>
-    <li th:each="action : ${actionHistory}" th:text="${action}"></li>
-</ul>
+<script>
+    var refresh_rate = 60; //<-- In seconds, change to your needs
+    var last_user_action = 0;
+    var has_focus = false;
+    var lost_focus_count = 0;
+    var focus_margin = 10; // If we lose focus more then the margin we want to refresh
 
 
+    function reset() {
+        last_user_action = 0;
+        console.log("Reset");
+    }
+
+    function windowHasFocus() {
+        has_focus = true;
+    }
+
+    function windowLostFocus() {
+        has_focus = false;
+        lost_focus_count++;
+        console.log(lost_focus_count + " <~ Lost Focus");
+    }
+
+    setInterval(function () {
+        last_user_action++;
+        refreshCheck();
+    }, 1000);
+
+    function refreshCheck() {
+        var focus = window.onfocus;
+        if ((last_user_action >= refresh_rate && !has_focus && document.readyState == "complete") || lost_focus_count > focus_margin) {
+            window.location.reload(); // If this is called no reset is needed
+            reset(); // We want to reset just to make sure the location reload is not called.
+        }
+
+    }
+    window.addEventListener("focus", windowHasFocus, false);
+    window.addEventListener("blur", windowLostFocus, false);
+    window.addEventListener("click", reset, false);
+    window.addEventListener("mousemove", reset, false);
+    window.addEventListener("keypress", reset, false);
+    window.addEventListener("scroll", reset, false);
+    document.addEventListener("touchMove", reset, false);
+    document.addEventListener("touchEnd", reset, false);
+</script>
 </body>
 </html>

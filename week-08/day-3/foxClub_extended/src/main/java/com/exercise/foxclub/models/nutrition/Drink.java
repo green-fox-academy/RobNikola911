@@ -1,0 +1,36 @@
+package com.exercise.foxclub.models.nutrition;
+
+import com.exercise.foxclub.models.character.Fox;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Getter
+@Setter
+@DiscriminatorValue("1")
+public class Drink extends Nutrition {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    private final int reductionTimeMinutes = 2;
+    @OneToMany(targetEntity = Fox.class, fetch = FetchType.EAGER, mappedBy = "drink")
+    private List<Fox> fox;
+
+    public Drink() {
+        super(Type.DRINK);
+        setReductionTimeMinutes(reductionTimeMinutes);
+        fox = new ArrayList<>();
+        setName("beer");
+    }
+
+    public Drink(String name) {
+        super(Type.DRINK);
+        setReductionTimeMinutes(reductionTimeMinutes);
+        fox = new ArrayList<>();
+        setName(name);
+    }
+}
