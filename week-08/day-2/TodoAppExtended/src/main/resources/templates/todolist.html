@@ -11,26 +11,53 @@
 <br>
 <a href="/assignee">List of Assignees</a>
 
-<form th:action="@{/todo/search}" method="POST">
-    <label>Search: </label>
-    <input type="text" placeholder="Search here" name="search_term">
 
-    <label> by: </label>
-    <input type="submit" name="search_by" value="Title">
+
+<form th:action="@{/todo/search-title}" method="POST">
+    <label for="title">Search: </label>
+    <input type="text" placeholder="Search here" name="search_term" id="title">
+    <button type="submit">SEARCH</button>
 </form>
+<br>
+<form th:action="@{/todo/search-creation-date}" method="post">
+    <label for="creationdate">Search by creation date:</label>
+    <input type="date" name="dateSearch" id="creationdate">
+    <button type="submit">SEARCH</button>
+</form>
+<br>
+<form th:action="@{/todo/search-due-date}" method="post">
+    <label for="date">Search by due date:</label>
+    <input type="date" name="dateSearch" id="date">
+    <button type="submit">SEARCH</button>
+</form>
+<br>
+<form th:action="@{/todo/search-assignee}" method="post">
+    <label for="assignee">Search by assignee:</label>
+    <input type="text" name="assigneeSearch" id="assignee">
+    <button type="submit">SEARCH</button>
+</form>
+
 
 <table>
     <tr>
-        <th>Id: </th>
-        <th>Title: </th>
-        <th>Urgent: </th>
-        <th>Done: </th>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Assignee</th>
+        <th>Creation Date</th>
+        <th>Due Date</th>
+        <th>Urgent</th>
+        <th>Done</th>
     </tr>
     <tr th:if="${todos.size() > 0}" th:each="todo : ${todos}">
         <td th:text="${todo.getId()}"></td>
         <td th:text="${todo.getTitle()}"></td>
-        <td th:text="${todo.getUrgent()}"></td>
-        <td th:text="${todo.getDone()}"></td>
+        <td th:text="${todo.description}"></td>
+        <td><a th:href="@{/search(assignee=${todo.assignee.id})}" th:text="${todo.assignee.name}"></a></td>
+        <td th:text="${todo.creationDate}"></td>
+        <td th:text="${todo.dueDate}"></td>
+        <td th:text="${todo.urgent}"></td>
+        <td th:text="${todo.done}"></td>
         <td>
             <a th:href="|/todo/${todo.getId()}/delete|">delete</a>
         </td>

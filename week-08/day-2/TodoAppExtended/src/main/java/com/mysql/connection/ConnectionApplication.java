@@ -7,19 +7,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ConnectionApplication implements CommandLineRunner {
+public class ConnectionApplication {
 
-    private final TodoRepository todoRepository;
-
-    public ConnectionApplication(TodoRepository todoRepository) {
-        this.todoRepository = todoRepository;
-    }
 
     public static void main(String[] args) {
         SpringApplication.run(ConnectionApplication.class, args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-    }
 }

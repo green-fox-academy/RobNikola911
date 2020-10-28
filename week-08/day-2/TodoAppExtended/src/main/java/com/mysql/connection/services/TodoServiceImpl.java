@@ -4,6 +4,7 @@ import com.mysql.connection.models.Todo;
 import com.mysql.connection.repositories.TodoRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,13 +31,34 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public List<Todo> listByDone(Boolean state) {
         return todoRepository.findAll().stream()
-                .filter(todo -> todo.getDone() == state)
+                .filter(todo -> todo.isDone() == state)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<Todo> listAllBy(String searchTerm, String searchBy) {
+    public List<Todo> listAllBy(String searchTerm) {
         return todoRepository.findAllByTitleContainsIgnoreCase(searchTerm);
+    }
+
+    @Override
+    public List<Todo> findAllByCreationDate(LocalDate date) {
+        return todoRepository.findAllByCreationDate(date);
+    }
+
+    @Override
+    public List<Todo> findAllByDueDate(LocalDate dateSearch) {
+        return todoRepository.findAllByDueDate(dateSearch);
+    }
+
+
+    @Override
+    public List<Todo> findByAssigneeName(String name) {
+        return todoRepository.findByAssigneeName(name);
+    }
+
+    @Override
+    public List<Todo> findAllByAssignee_Id(Long id) {
+        return todoRepository.findAllByAssignee_Id(id);
     }
 
 

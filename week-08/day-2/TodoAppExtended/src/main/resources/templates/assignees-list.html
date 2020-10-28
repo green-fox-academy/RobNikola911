@@ -23,8 +23,8 @@
     </tr>
     <tr th:each="assignee : ${assignees}">
         <td th:text="${assignee.getId()}"></td>
-        <td><a th:href="'/assignee/' + ${assignee.getId()} + '/todos'" th:text="${assignee.getName()}"></a></td>
-        <td th:text="${assignee.getEmail()}"></td>
+        <td><a th:href="@{/search(assignee=${assignee.id})}" th:text="${assignee.name}"></a></td>
+        <td th:text="${assignee.email}"></td>
         <td>
             <a th:href="|/assignee/${assignee.getId()}/delete|">delete</a>
         </td>

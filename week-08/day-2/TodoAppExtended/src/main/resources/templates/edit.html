@@ -10,15 +10,32 @@
 
 <form th:action="@{/todo/edit}" th:object="${todo}" method="post">
     <input type="hidden" th:field="*{id}">
-    <label>Todo Description</label>
+    <label>Todo Title</label>
     <input type="text" th:field="*{title}"/>
     </br>
+
+    <label>Todo Description</label>
+    <input type="text" th:field="*{description}"/>
+    <br>
+
+    <label>Due Date</label>
+    <input type="date" th:field="*{dueDate}"/>
+    <br>
+
     <label>Urgent</label>
     <input type="checkbox" th:field="*{urgent}"/>
     </br>
+
     <label>Done</label>
     <input type="checkbox" th:field="*{done}"/>
     </br>
+
+    <label for="assignee">Assignee:</label>
+    <select name="assignee" id="assignee">
+        <option th:each="assignee : ${assignees}"
+                th:value="${assignee.id}" th:text="${assignee.name}" th:selected=${assignee.id==todo.assignee.id}></option>
+    </select>
+
     <button type="submit">Modify Todo</button>
     <a th:href="@{/todo/}">Cancel</a>
 </form>

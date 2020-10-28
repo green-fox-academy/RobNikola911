@@ -6,14 +6,17 @@
     <title>Add Assignee</title>
 </head>
 <body>
+<a href="/todo">Go to Todos</a>
+<br>
+
 <h1>Add new Assignee</h1>
 
 <form action="/assignee/add" method="post">
-    <label>Name: </label>
-    <input type="text" name="name" />
-    <label>Email: </label>
-    <input type="email" name="email" />
-    <input type="submit" value="Add New">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email">
+    <button type="submit">Add new Assignee</button>
 </form>
 </body>
 </html>

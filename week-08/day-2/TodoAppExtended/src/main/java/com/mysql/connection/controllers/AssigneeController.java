@@ -2,9 +2,12 @@ package com.mysql.connection.controllers;
 
 import com.mysql.connection.models.Assignee;
 import com.mysql.connection.repositories.AssigneeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Collections;
 
 @Controller
 @RequestMapping("/assignee")
@@ -12,6 +15,7 @@ public class AssigneeController {
 
     private final AssigneeRepository assigneeRepository;
 
+    @Autowired
     public AssigneeController(AssigneeRepository assigneeRepository) {
         this.assigneeRepository = assigneeRepository;
     }
@@ -50,4 +54,5 @@ public class AssigneeController {
         assigneeRepository.save(assignee);
         return "redirect:/assignee/list";
     }
+
 }
