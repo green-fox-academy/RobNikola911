@@ -2,10 +2,7 @@ package com.greenfox.reddit.models;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -19,11 +16,12 @@ public class Post {
     private Long id;
     private String title;
     private String url;
-    private int rank;
+    private int likeCounter;
 
 
     public Post(String title, String url) {
         this.title = title;
         this.url = url;
+        this.likeCounter = 0;
     }
 }

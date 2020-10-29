@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<div class ="container justify-content-center">
+    <a href="/submit">Submit new post</a>
+    <h1>Trending post</h1>
+    <table>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tr th:each="post : ${posts}">
+            <td th:text="${post.likeCounter}"></td>
+<!--            <td><a th:href="@{'/' + ${post.id} + '/increment'}">+</a></td>-->
+<!--            <td><a th:href="@{'/' + ${post.id} + '/decrement'}">-</a></td>-->
+            <td><a th:href="@{'/' + ${post.id} + '/update/?likeChange=1'}">+</a></td>
+            <td><a th:href="@{'/' + ${post.id} + '/update/?likeChange=-1'}">–</a></td>
+            <td><a th:href="${post.url}" th:text="${post.title}"></a></td>
+        </tr>
+
+    </table>
+</div>
+</body>
+</html>
