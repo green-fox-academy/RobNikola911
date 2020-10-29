@@ -3,6 +3,7 @@ package com.greenfox.reddit.models;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -17,6 +18,9 @@ public class Post {
     private String title;
     private String url;
     private int likeCounter;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date date = new Date();
 
 
     public Post(String title, String url) {

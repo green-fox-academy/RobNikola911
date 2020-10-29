@@ -12,4 +12,9 @@ public interface PostService {
     void decrement(Long id);
 
     void updateLikeCounter(Long id, int likeChange);
+    List<Post> findAllByOrderByLikeCounterDesc();
+    List<Post> findBestTenPost();
+    List<Post> findTenPostByPage(Integer numberOfPage);
+    Integer pageCounter(Integer numberOfPage);
+    List<Post> showThisPage(Integer numberOfPage) throws Exception;
 }
