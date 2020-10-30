@@ -16,4 +16,5 @@ public interface PostService {
 
     List<Post> pageablePostByLikeCounter(Integer page);
     int validPage(int nextPage);
+    int[] maxPage();
 }

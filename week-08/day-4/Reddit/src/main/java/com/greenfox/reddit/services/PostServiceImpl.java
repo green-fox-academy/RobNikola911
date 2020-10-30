@@ -62,10 +62,16 @@ public class PostServiceImpl implements PostService{
     public int validPage(int nextPage) {
         if (nextPage <= 0) {
             return 0;
-        } else if (nextPage > (int) (postRepository.findAll().size() / 10 )) {
-            return (int) (postRepository.findAll().size() / 10);
+        } else if (nextPage > (int) ((postRepository.findAll().size() -1) / 10 )) {
+            return (int) ((postRepository.findAll().size() -1) / 10);
         }
         return nextPage;
+    }
+
+    @Override
+    public int[] maxPage() {
+        int highestPage = (int) ((postRepository.findAll().size() -1) / 10 ) + 1;
+        return java.util.stream.IntStream.range(1, highestPage + 1).toArray();
     }
 
     @Override
