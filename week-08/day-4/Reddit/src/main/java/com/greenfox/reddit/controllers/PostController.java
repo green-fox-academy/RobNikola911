@@ -4,45 +4,32 @@ import com.greenfox.reddit.models.Post;
 import com.greenfox.reddit.services.PostService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class PostController {
 
     private final PostService postService;
-    ModelMap modelMap = new ModelMap();
 
     public PostController(PostService postService) {
         this.postService = postService;
     }
 
     @GetMapping("/")
-    public String home(Model model){
-        List<Post> bestTenPost;
-        if (modelMap.isEmpty()) {
-            bestTenPost = postService.findBestTenPost();
-        } else {
-            bestTenPost = (List<Post>) modelMap.get("page");
-        }
-        model.addAttribute("posts", postService.findAllByOrderByLikeCounterDesc());
-        model.addAttribute("posts", bestTenPost);
+    public String home(Model model) {
+        model.addAttribute("posts", postService.pageablePostByLikeCounter(0));
+        model.addAttribute("currentPage", 0);
         return "home";
     }
 
-    @PostMapping("/page/{pageNumber}")
-    public ModelAndView changePagePost(@PathVariable("pageNumber") Integer pageNumber) throws Exception {
-        modelMap.put("page", postService.showThisPage(pageNumber));
-        return new ModelAndView("redirect:/", modelMap);
-    }
-
-    @GetMapping("/page/{pageNumber}")
-    public ModelAndView changePageGet(@PathVariable Integer pageNumber) throws Exception {
-        modelMap.put("page", postService.showThisPage(pageNumber));
-        return new ModelAndView("redirect:/", modelMap);
+    @GetMapping("/{currentPage}")
+    public String currentPage(Model model, @PathVariable(name = "currentPage") int currentPage) {
+        int nextPage = postService.validPage(currentPage);
+        if (nextPage != currentPage) {
+            return "redirect:/" + nextPage;
+        }
+        model.addAttribute("posts", postService.pageablePostByLikeCounter(currentPage));
+        return "home";
     }
 
     @GetMapping("/submit")

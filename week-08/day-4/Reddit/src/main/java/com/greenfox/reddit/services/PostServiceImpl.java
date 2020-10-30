@@ -2,6 +2,9 @@ package com.greenfox.reddit.services;
 
 import com.greenfox.reddit.models.Post;
 import com.greenfox.reddit.repositories.PostRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,8 +13,6 @@ import java.util.Optional;
 @Service
 public class PostServiceImpl implements PostService{
     PostRepository postRepository;
-
-    public Integer pageNumber = 1;
 
     public PostServiceImpl(PostRepository postRepository) {
         this.postRepository = postRepository;
@@ -58,65 +59,19 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public List<Post> findAllByOrderByLikeCounterDesc() {
-        return postRepository.findAllByOrderByLikeCounterDesc();
+    public int validPage(int nextPage) {
+        if (nextPage <= 0) {
+            return 0;
+        } else if (nextPage > (int) (postRepository.findAll().size() / 10 )) {
+            return (int) (postRepository.findAll().size() / 10);
+        }
+        return nextPage;
     }
 
     @Override
-    public List<Post> findBestTenPost() {
-        if (postRepository.count() <= 10) {
-            return postRepository.findAllByOrderByLikeCounterDesc();
-        }
-        return postRepository.findAllByOrderByLikeCounterDesc().subList(0,9);
-    }
-
-    @Override
-    public Integer pageCounter(Integer numberOfPage) {
-        Integer page = postRepository.findAllByOrderByLikeCounterDesc().size();
-        if (numberOfPage == 2) {
-            if (page < 20) {
-                return page;
-            }else return 20;
-        }
-        if (numberOfPage == 3) {
-            if (page < 30) {
-                return page;
-            }else return 30;
-        }
-        if (numberOfPage == 4) {
-            if (page < 40) {
-                return page;
-            }else return 40;
-        }
-        return 40;
-    }
-
-    @Override
-    public List<Post> findTenPostByPage(Integer numberOfPage) {
-        return postRepository.findAllByOrderByLikeCounterDesc().subList(((numberOfPage*10)-10), pageCounter(numberOfPage));
-    }
-
-    @Override
-    public List<Post> showThisPage(Integer numberOfPage) throws Exception {
-        if (numberOfPage == null) {
-            throw new Exception("No such a page.");
-        }else if (numberOfPage == -1) {
-            pageNumber--;
-        }else if (numberOfPage == 0) {
-            pageNumber++;
-        }else {
-            pageNumber = numberOfPage;
-        }
-        if (pageNumber < 1) {
-            pageNumber = 1;
-        }
-        if (pageNumber == 1) {
-            return findBestTenPost();
-        }
-        if (pageNumber <= 4) {
-            return findTenPostByPage(pageNumber);
-        }else {
-            throw new Exception("No such a page.");
-        }
+    public List<Post> pageablePostByLikeCounter(Integer page) {
+        Pageable sortedByLikeCounter = PageRequest.of(page, 10, Sort.by("LikeCounter").descending());
+                List<Post> posts = postRepository.findAllByOrderByLikeCounterDesc(sortedByLikeCounter);
+        return posts;
     }
 }

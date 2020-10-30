@@ -1,6 +1,7 @@
 package com.greenfox.reddit.services;
 
 import com.greenfox.reddit.models.Post;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,9 +13,7 @@ public interface PostService {
     void decrement(Long id);
 
     void updateLikeCounter(Long id, int likeChange);
-    List<Post> findAllByOrderByLikeCounterDesc();
-    List<Post> findBestTenPost();
-    List<Post> findTenPostByPage(Integer numberOfPage);
-    Integer pageCounter(Integer numberOfPage);
-    List<Post> showThisPage(Integer numberOfPage) throws Exception;
+
+    List<Post> pageablePostByLikeCounter(Integer page);
+    int validPage(int nextPage);
 }

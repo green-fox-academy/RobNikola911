@@ -28,28 +28,11 @@
     </table>
     <form>
         <table>
-            <tbody>
             <tr>
-                <td>
-                    <button><a href="/page/-1"><-</a></button>
-                </td>
-                <td>
-                    <button><a href="/page/1">1</a></button>
-                </td>
-                <td>
-                    <button><a href="/page/2">2</a></button>
-                </td>
-                <td>
-                    <button><a href="/page/3">3</a></button>
-                </td>
-                <td>
-                    <button><a href="/page/4">4</a></button>
-                </td>
-                <td>
-                    <button><a href="/page/0">-></a></button>
-                </td>
+                <td><a th:href="@{'/' + ${currentPage - 1}}"><<</a></td>
+                <td th:text="${currentPage + 1}"></td>
+                <td><a th:href="@{'/' + ${currentPage + 1}}">>> </a></td>
             </tr>
-            </tbody>
         </table>
     </form>
 </div>
