@@ -13,6 +13,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "USER")
 public class User {
 
     @Id
@@ -21,15 +22,16 @@ public class User {
     private String username;
     private String password;
 
-    @OneToMany
-    List<Post> posts;
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
 
-    @OneToMany
-    List<Post> voted;
+    @OneToMany(mappedBy = "user")
+    private List<Post> voted;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+
     }
 
     public void addToVoted (Post post) {
