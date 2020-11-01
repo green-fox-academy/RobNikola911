@@ -12,29 +12,22 @@ import java.util.List;
 @Getter
 @Setter
 @AllArgsConstructor
-@NoArgsConstructor
-@Table(name = "USER")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id_user;
     private String username;
     private String password;
+    private boolean voted;
 
-    @OneToMany(mappedBy = "user")
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "user")
-    private List<Post> voted;
 
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-
+        voted = false;
     }
 
-    public void addToVoted (Post post) {
-        voted.add(post);
+    public User() {
     }
 }

@@ -1,11 +1,14 @@
 package com.greenfox.reddit.controllers;
 
 import com.greenfox.reddit.models.Post;
+import com.greenfox.reddit.models.User;
 import com.greenfox.reddit.services.PostService;
 import com.greenfox.reddit.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 public class PostController {
@@ -38,12 +41,12 @@ public class PostController {
     }
 
     @GetMapping("/submit")
-    public String submit(){
+    public String submit() {
         return "submit";
     }
 
     @PostMapping("/submit")
-    public String submitPost(@ModelAttribute Post post){
+    public String submitPost(@ModelAttribute Post post) {
         postService.submitPost(post);
         return "redirect:/";
     }
@@ -61,9 +64,36 @@ public class PostController {
 //    }
 
     @GetMapping("/{id}/{currentPage}/update")
-    public String updateCounter (@PathVariable Long id, @PathVariable int currentPage,
-                                 @RequestParam int likeChange){
+    public String updateCounter(@PathVariable Long id, @PathVariable int currentPage,
+                                @RequestParam int likeChange) {
         postService.updateLikeCounter(id, likeChange);
         return "redirect:/" + currentPage;
+    }
+
+    @GetMapping("/login")
+    public String loginUser() {
+
+        return "loginPage";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(String username, String password) {
+        List<User> listOfUsers = userService.findAllUsers();
+        if (userService.checkUser(username, password)) {
+            return "redirect:/";
+        } else {
+            return "wrongUser";
+        }
+    }
+
+    @GetMapping("/register")
+    public String registerUser(){
+        return "register";
+    }
+
+    @PostMapping("/register")
+    public String registerUser(@ModelAttribute User user){
+        userService.saveUser(user);
+        return "redirect:/login";
     }
 }

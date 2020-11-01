@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Register new user</h1>
+
+<form action="/register" method="post">
+    <label>Name: </label>
+    <input type="text" name="username"> <br>
+
+    <label>Password: </label>
+    <input type="password" id="txtPassword" name="password"> <br>
+
+    <label>Password confirmation: </label>
+    <input type="password" id="txtConfirmPassword" name="passwordConfirmation"> <br>
+
+    <input type="submit" onclick="return Validate()" value="Register">
+
+</form>
+
+<script type="text/javascript">
+    function Validate() {
+        var password = document.getElementById("txtPassword").value;
+        var confirmPassword = document.getElementById("txtConfirmPassword").value;
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+</body>
+</html>

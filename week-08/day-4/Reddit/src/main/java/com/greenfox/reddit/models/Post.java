@@ -10,7 +10,6 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "POST")
 public class Post {
 
     @Id
@@ -19,10 +18,6 @@ public class Post {
     private String title;
     private String url;
     private int likeCounter;
-
-    @ManyToOne
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date date = new Date();
