@@ -1,17 +1,14 @@
 package com.greenfox.backendapi.models;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.Instant;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Log {
@@ -20,10 +17,11 @@ public class Log {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.DATE)
+//    @CreationTimestamp
+//    @Temporal(TemporalType.DATE)
     @Column
-    private Date creation;
+//    private Date creation;
+    private Instant creation;
 
     @Column
     private String endpoint;
@@ -34,5 +32,6 @@ public class Log {
     public Log(String endpoint, String data) {
         this.endpoint = endpoint;
         this.data = data;
+        this.creation = Instant.now();
     }
 }

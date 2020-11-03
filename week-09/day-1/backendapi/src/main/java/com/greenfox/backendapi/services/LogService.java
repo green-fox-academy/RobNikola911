@@ -1,5 +1,6 @@
 package com.greenfox.backendapi.services;
 
+import com.greenfox.backendapi.DTOs.LogDTO;
 import com.greenfox.backendapi.models.Log;
 import com.greenfox.backendapi.repositories.LogRepository;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,15 @@ public class LogService {
         this.logRepository = logRepository;
     }
 
-    public void save (Log entity) {
+    public void save(Log entity) {
         logRepository.save(entity);
     }
+
+    public LogDTO logEntries() {
+        LogDTO logDTO = new LogDTO();
+        logDTO.setEntries(logRepository.findAll());
+        logDTO.setEntry_count(logRepository.findAll().size());
+        return logDTO;
+    }
+
 }
