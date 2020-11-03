@@ -14,13 +14,14 @@ import java.util.stream.IntStream;
 public class Array {
     private String what;
     private int[] numbers;
-    private int result;
+    private Object result;
 
     public Array(String what, int[] numbers, int result) {
         this.what = what;
         this.numbers = numbers;
         this.result = result;
     }
+
 
     public void sumArray(Array array) {
         if (what.equals("sum")) {
@@ -38,11 +39,11 @@ public class Array {
         }
     }
 
-    public Object doubleArray(Array array) {
+    public void doubleArray(Array array) {
         if (what.equals("double")) {
-            int[] d = IntStream.of(numbers).flatMap(x -> IntStream.of(x, x)).toArray();
-            return new ArrayResultType(d);
-        } else
-            return new Error("Please provide what to do with the numbers!");
+            result = IntStream.of(numbers).map(i -> i * 2).toArray();
+            what = null;
+            numbers = null;
+        }
     }
 }
