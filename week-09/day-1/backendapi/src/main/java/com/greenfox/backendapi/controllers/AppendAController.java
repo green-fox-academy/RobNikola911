@@ -19,7 +19,7 @@ public class AppendAController {
     }
 
     @GetMapping("/appenda/{appendable}")
-    public Object append(@PathVariable String appendable) {
+    public Object append(@PathVariable() String appendable) {
         logService.save(new Log("/appenda/"+appendable, appendable));
         if (appendable != null) {
             AppendA append = new AppendA(appendable.concat("a"));
