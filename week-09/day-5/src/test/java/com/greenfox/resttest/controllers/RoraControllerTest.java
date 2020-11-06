@@ -1,7 +1,6 @@
 package com.greenfox.resttest.controllers;
 
 import com.greenfox.resttest.services.RoraService;
-import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +16,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(GuardianController.class)
-public class GuardianControllerTest {
+public class RoraControllerTest {
+
+
 
     @Autowired
     private MockMvc mockMvc;
 
-
+    @MockBean
+    private RoraService roraService;
 
     @Test
-    public void getNotExistingParam() throws Exception {
-        mockMvc.perform(get("/groot"))
-                .andExpect(status().isBadRequest())
-                .andExpect(jsonPath("$.error",is("I am Groot!")));
+    public void getRocket() throws Exception {
+        mockMvc.perform(get("/rocket"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.caliber25",is(0)))
+                .andExpect(jsonPath("$.caliber30",is(0)))
+                .andExpect(jsonPath("$.caliber50",is(0)))
+                .andExpect(jsonPath("$.ready",is(false)))
+                .andExpect(jsonPath("$.shipstatus",is("empty")));
     }
 
     @Test
     public void getExistingParam() throws Exception {
-        mockMvc.perform(get("/groot?message=somemessage"))
+        mockMvc.perform(get("/rocket/fill?caliber=.30&amount=500"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.recieved",is("somemessage")))
-                .andExpect(jsonPath("$.translated",is("I am Groot!")));
-    }
+                .andExpect(jsonPath("$.received",is(".30")))
+                .andExpect(jsonPath("$.amount",is(500)));
 
-//    @Test
-//    void controlTest(){
-//        String unittest = "Test message";
-//        GuardianController controller = new GuardianController();
-//        Assert.assertEquals("Test message", controller.getGroot(unittest)
-//                .getBody()
-//                .getRecieved());
-//    }
+    }
 }

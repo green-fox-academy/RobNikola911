@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public interface RoraService {
 
     void fillCargo(String caliber, Integer amount);
-    String getShipStatus ();
+    String getShipStatus();
     public Rora getRora();
 
 }

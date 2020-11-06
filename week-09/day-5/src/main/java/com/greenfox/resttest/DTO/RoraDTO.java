@@ -27,8 +27,8 @@ public class RoraDTO {
     public RoraDTO(Rora rora, String caliber, Integer amount) {
         this.received = caliber;
         this.amount = amount;
-        this.shipStatus = rora.getShipStatus();
-        this.ready = true;
+        this.shipStatus = rora.updateShipStatus();
+        this.ready = rora.isReady();
     }
 
     public RoraDTO() {

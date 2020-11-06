@@ -3,9 +3,12 @@ package com.greenfox.resttest.models;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Rora {
 
@@ -14,7 +17,7 @@ public class Rora {
     private Integer caliber50;
     @JsonProperty("shipstatus")
     private String shipStatus;
-    private Boolean ready;
+    private boolean ready;
     private String received;
 
 
@@ -37,6 +40,7 @@ public class Rora {
             this.ready = true;
             return "full";
         } else if (totalAmount > shipMaxHold) {
+            this.ready = false;
             return "overloaded";
         } else {
             return shipStatusValue + "%";
@@ -44,12 +48,17 @@ public class Rora {
     }
 
     public void fillCargo(String caliber, Integer amount) {
-        if (caliber.equals("0.25")) {
-            this.caliber25 += amount;
-        } else if (caliber.equals("0.30")) {
-            this.caliber30 += amount;
-        }else if (caliber.equals("0.50")) {
-            this.caliber50 += amount;
+        switch (caliber) {
+            case ".25":
+                this.caliber25 += amount;
+                break;
+            case ".30":
+                this.caliber30 += amount;
+                break;
+            case ".50":
+                this.caliber50 += amount;
+                break;
         }
+
     }
 }
