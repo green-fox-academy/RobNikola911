@@ -18,4 +18,14 @@ public class RoraServiceImpl implements RoraService{
         }
 
     }
+
+    @Override
+    public String getShipStatus() {
+        return rora.updateShipStatus();
+    }
+
+    @Override
+    public Rora getRora() {
+        return rora;
+    }
 }
