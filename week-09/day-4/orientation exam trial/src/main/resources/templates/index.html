@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>URL aliaser</title>
+</head>
+<body>
+<h1> URL aliaser</h1>
+
+<p th:text="Your URL is aliased to ${alias} and your secret code is ${secretCode}"></p>
+<div id="sign-up-window">
+    <div id="sign-up-form">
+        <form action='/save-link' method="post">
+            
+            <label for="name">URL</label>
+            <input type="text" id="name" name="URL" placeholder="URL" required>
+            <br>
+            <label for="alias">Alias</label>
+            <input type="text" id="alias" name="alias" placeholder="Alias">
+            <br>
+            <button type="submit">Submit</button>
+
+        </form>
+<!--        <p>Not registered yet? <a href="/create-account">Click here to create your account</a></p>-->
+    </div>
+</div>
+
+</body>
+</html>
