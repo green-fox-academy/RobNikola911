@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface UrlRepository extends JpaRepository<UrlModel, Long> {
 
+    UrlModel findAllByURL(String URL);
 }

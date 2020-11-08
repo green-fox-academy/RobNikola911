@@ -26,4 +26,14 @@ public class UrlServiceImpl implements UrlService {
     public void createAlias(UrlModel urlModel) {
         urlRepository.save(urlModel);
     }
+
+    @Override
+    public boolean isUrlPresent(String URL) {
+        return urlRepository.findAll().contains(URL);
+    }
+
+    @Override
+    public UrlModel getUrlByName(String URL) {
+        return urlRepository.findAllByURL(URL);
+    }
 }

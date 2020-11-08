@@ -6,14 +6,16 @@
 </head>
 <body>
 <h1> URL aliaser</h1>
+<div th:if="${UrlModel}">
+<p th:text="'Your URL is aliased to ' + ${url} + ' and your secret code is ' + ${secretCode}"></p>
 
-<p th:text="Your URL is aliased to ${alias} and your secret code is ${secretCode}"></p>
+</div>
 <div id="sign-up-window">
     <div id="sign-up-form">
         <form action='/save-link' method="post">
             
-            <label for="name">URL</label>
-            <input type="text" id="name" name="URL" placeholder="URL" required>
+            <label for="URL">URL</label>
+            <input type="text" id="URL" name="URL" placeholder="URL" required>
             <br>
             <label for="alias">Alias</label>
             <input type="text" id="alias" name="alias" placeholder="Alias">
