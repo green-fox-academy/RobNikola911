@@ -1,5 +1,6 @@
 package com.greenfox.p2pchat.controllers;
 
+import com.greenfox.p2pchat.dto.UpdateRequestDTO;
 import com.greenfox.p2pchat.dto.UserRequestDTO;
 import com.greenfox.p2pchat.services.UserService;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,12 @@ public class UserController {
     @PostMapping("/login")
     public String loginPost(@ModelAttribute UserRequestDTO userRequestDTO){
         userService.loginUser(userRequestDTO);
+        return "redirect:/login";
+    }
+
+    @PostMapping("/update")
+    public String updatePost(@ModelAttribute UpdateRequestDTO updateRequestDTO){
+        userService.updateUser(updateRequestDTO);
         return "redirect:/login";
     }
 }
