@@ -37,7 +37,7 @@ public class LogControllerTest {
         LogDTO testLogs = new LogDTO();
         testLogs.setEntries(Arrays.asList(new Log("\"/arrays\"", "\"double,[1, 2, 5, 10]\""),
                 new Log("\"/arraytest\"", "\"double,[1, 2, 5, 11]\"")));
-        testLogs.setEntry_count(2);
+        testLogs.setEntry_count(testLogs.getEntries().size());
         return testLogs;
     };
 
