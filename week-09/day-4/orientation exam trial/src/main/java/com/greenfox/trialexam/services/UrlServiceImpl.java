@@ -17,10 +17,6 @@ public class UrlServiceImpl implements UrlService {
         this.urlRepository = urlRepository;
     }
 
-    @Override
-    public List<UrlModel> findAll() {
-        return urlRepository.findAll();
-    }
 
     @Override
     public void createAlias(UrlModel urlModel) {
@@ -32,8 +28,4 @@ public class UrlServiceImpl implements UrlService {
         return urlRepository.findAll().contains(URL);
     }
 
-    @Override
-    public UrlModel getUrlByName(String URL) {
-        return urlRepository.findAllByURL(URL);
-    }
 }

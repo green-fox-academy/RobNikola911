@@ -1,6 +1,5 @@
 package com.greenfox.trialexam.models;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,23 +13,27 @@ import java.util.Random;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @Entity
 public class UrlModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String URL;
+    private String url;
     private String alias;
     private int hitCount;
     private String secretCode;
 
-    public UrlModel(String URL, String alias) {
+    public UrlModel(String url, String alias) {
         Random r = new Random();
-        this.URL = URL;
+        this.url = url;
         this.alias = alias;
         hitCount ++;
-        secretCode = String.format("%04d", r.nextInt(1001));
+  //      secretCode = String.format("%04d", r.nextInt(1001));
+    }
+
+    public UrlModel() {
+        Random r = new Random();
+        this.secretCode = String.format("%04d", r.nextInt(1001));
     }
 }

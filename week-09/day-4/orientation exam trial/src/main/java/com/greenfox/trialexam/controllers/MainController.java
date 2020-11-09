@@ -18,38 +18,37 @@ public class MainController {
         this.urlService = urlService;
     }
 
-    public boolean isUrlParameterValid(Model model, String URL) {
-        if(URL.equals("null")) {
-            model.addAttribute("notValidURL", true);
-            return false;
-        } else if(urlService.isUrlPresent(URL)) {
-            return true;
-        } else {
-            model.addAttribute("invalidName", true);
-            return false;
-        }
-    }
+//    public boolean isUrlParameterValid(Model model, String URL) {
+//        if(URL.equals("null")) {
+//            model.addAttribute("notValidURL", true);
+//            return false;
+//        } else if(urlService.isUrlPresent(URL)) {
+//            return true;
+//        } else {
+//            model.addAttribute("invalidName", true);
+//            return false;
+//        }
+//    }
 
     @GetMapping({"/", ""})
-    public String displayMainPage(Model model, @RequestParam(value = "url", required = false) String URL) {
-        if(URL != null) {
-            if (isUrlParameterValid(model, URL)) {
-                model.addAttribute("url", urlService.getUrlByName(URL));
-                return "index";
-            } else {
-                return "redirect:/";
-            }
-        }
+    public String displayMainPage() {
+
+        //        if(URL != null) {
+//            if (isUrlParameterValid(model, URL)) {
+//                model.addAttribute("url", urlService.getUrlByName(URL));
+//                return "index";
+//            } else {
+//                return "redirect:/";
+//            }
+ //       }
         return "index";
     }
 
     @PostMapping("/save-link")
-    public String saveLink(Model model, @ModelAttribute UrlModel urlModel,
-                           @RequestParam String URL,
-                           @RequestParam String alias){
+    public String saveLink(Model model, @ModelAttribute UrlModel urlModel){
         urlService.createAlias(urlModel);
-        model.addAttribute("URL", URL);
-        model.addAttribute("alias", alias);
+        model.addAttribute("alias", urlModel.getAlias());
+        model.addAttribute("secretCode", urlModel.getSecretCode());
         return "redirect:/";
     }
 }
