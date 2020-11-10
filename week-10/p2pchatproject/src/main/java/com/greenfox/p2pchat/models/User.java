@@ -13,14 +13,12 @@ public class User {
 
     @JsonProperty(value = "userid")
     private Long id;
-    private String login;
-    private String password;
     private String username;
+    private String avatarurl;
 
-    public User(Long id, String login, String password, String username) {
+    public User(Long id, String username, String avatarurl) {
         this.id = id;
-        this.login = login;
-        this.password = password;
         this.username = username;
+        this.avatarurl = avatarurl;
     }
 }

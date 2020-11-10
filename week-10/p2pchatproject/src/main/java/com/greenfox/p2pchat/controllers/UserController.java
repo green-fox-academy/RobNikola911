@@ -3,19 +3,32 @@ package com.greenfox.p2pchat.controllers;
 import com.greenfox.p2pchat.dto.UpdateRequestDTO;
 import com.greenfox.p2pchat.dto.UserRequestDTO;
 import com.greenfox.p2pchat.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@SessionAttributes("apiKey")
 public class UserController {
 
     private final UserService userService;
-
+    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
+
+    @GetMapping({"", "/"})
+    public String redirectToLogin(Model model) {
+        if (model.getAttribute("apiKey") == null) {
+            return "redirect:/login";
+        }
+        model.addAttribute("messages", userService.getMessages(model.getAttribute("apiKey").toString(), 20));
+        return "index";
+    }
+
 
     @GetMapping("/register")
     public String getToRegister(){
@@ -23,11 +36,16 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerPost(@ModelAttribute UserRequestDTO userRequestDTO){
+    public String registerPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO){
         userService.registerUser(userRequestDTO);
-        return "redirect:/login";
-    }
 
+        if(userService.registerUser(userRequestDTO) != null) {
+            model.addAttribute("registrationSuccess", true);
+            return "login";
+        }
+        model.addAttribute("registrationFail", true);
+        return "register";
+    }
 
     @GetMapping("/login")
     public String getToLogin(){
@@ -35,14 +53,38 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginPost(@ModelAttribute UserRequestDTO userRequestDTO){
-        userService.loginUser(userRequestDTO);
-        return "redirect:/login";
+    public String loginPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO,
+                            RedirectAttributes attributes){
+
+        if (userService.loginUser(userRequestDTO) == null) {
+            return "login";
+        }
+
+        model.addAttribute("apiKey", userService.loginUser(userRequestDTO));
+        attributes.addFlashAttribute("username", userRequestDTO.getLogin());
+        attributes.addFlashAttribute("loginSuccess", true);
+        return "redirect:/";
+    }
+
+    @GetMapping("/update")
+    public String getUpdate(Model model) {
+        if (model.getAttribute("apiKey") == null) {
+            return "login";
+        }
+        return "update";
     }
 
     @PostMapping("/update")
-    public String updatePost(@ModelAttribute UpdateRequestDTO updateRequestDTO){
-        userService.updateUser(updateRequestDTO);
+    public String updatePost(Model model, @ModelAttribute UpdateRequestDTO updateRequestDTO){
+
+        userService.updateUser(updateRequestDTO, model.getAttribute("apiKey").toString());
+        return "redirect:/";
+    }
+
+    @GetMapping("/logout")
+    public String logoutPost(Model model, SessionStatus status){
+        userService.logoutUser(model.getAttribute("apiKey").toString());
+        status.setComplete();
         return "redirect:/login";
     }
 }

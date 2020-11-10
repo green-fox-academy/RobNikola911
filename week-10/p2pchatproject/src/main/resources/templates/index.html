@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Chat App</title>
+    <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<nav>
+    <h1>Peer to Peer Chat Program</h1>
+    <p th:if="${loginSuccess}" th:text="'Login successful! Hello ' + ${username}">Login successful! Hello</p>
+    <p th:if="${updateSuccess}" th:text="'Update successful! Hello ' + ${username}">Update successful! Hello</p>
+    <div id="user-info">
+        <a th:if="${userAvatar}" th:href="@{/update}"><img th:src="@{${userAvatar}}" alt="User Avatar" class="user-avatar" title="Click here to update profile"></a>
+        <a th:unless="${userAvatar}" th:href="@{/update}"><img src="https://www.choicemedwaste.com/wp-content/uploads/default-user-avatar-dc6f2da9-300x300.gif" alt="User Avatar" class="user-avatar" title="Click here to update profile"></a>
+        <a th:href="@{/logout}"><img src="https://findicons.com/files/icons/2198/dark_glass/128/exit.png" alt="Logout Button" id="logout" title="Log Out"></a>
+    </div>
+</nav>
+
+
+<div>
+    <ul>
+        <li>App</li>
+        <span>Hi there! Submit your message using the send button!</span>
+    </ul>
+</div>
+
+
+</body>
+</html>

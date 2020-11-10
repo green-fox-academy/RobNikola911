@@ -9,11 +9,14 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UpdateRequestDTO {
+public class UpdateResponseDTO {
+
+    private Long userId;
     private String username;
     private String avatarUrl;
 
-    public UpdateRequestDTO(String username, String avatarUrl) {
+    public UpdateResponseDTO(Long userId, String username, String avatarUrl) {
+        this.userId = userId;
         this.username = username;
         this.avatarUrl = avatarUrl;
     }

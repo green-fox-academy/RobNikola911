@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="/styles-update.css" />
+</head>
+<body>
+
+<div id="sign-up-window">
+    <div id="sign-up-form">
+        <form th:action="@{/update}" method="post">
+
+            <p id="form-title">Update your profile</p>
+            <br>
+            <label for="name">Username</label>
+            <input type="text" id="name" name="username" placeholder="New username" maxlength="50" required>
+            <br>
+            <label for="avatarurl">Avatar URL</label>
+            <input type="url" id="avatarurl" name="avatarUrl" placeholder="URL to your avatar...">
+
+            <button type="submit" id="form-button">UPDATE</button>
+
+        </form>
+        <a href="/">Back</a>
+    </div>
+</div>
