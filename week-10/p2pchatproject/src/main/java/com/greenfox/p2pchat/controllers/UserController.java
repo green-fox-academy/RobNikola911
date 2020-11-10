@@ -36,14 +36,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO){
+    public String registerPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO,
+                               RedirectAttributes attributes){
         userService.registerUser(userRequestDTO);
 
         if(userService.registerUser(userRequestDTO) != null) {
-            model.addAttribute("registrationSuccess", true);
+            attributes.addFlashAttribute("registrationSuccess", true);
             return "login";
         }
-        model.addAttribute("registrationFail", true);
+        attributes.addFlashAttribute("registrationFail", true);
         return "register";
     }
 
@@ -57,6 +58,7 @@ public class UserController {
                             RedirectAttributes attributes){
 
         if (userService.loginUser(userRequestDTO) == null) {
+            attributes.addFlashAttribute("loginFailed", true);
             return "login";
         }
 
@@ -75,15 +77,23 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String updatePost(Model model, @ModelAttribute UpdateRequestDTO updateRequestDTO){
+    public String updatePost(Model model, @ModelAttribute UpdateRequestDTO updateRequestDTO,
+                             RedirectAttributes attributes){
 
         userService.updateUser(updateRequestDTO, model.getAttribute("apiKey").toString());
+        attributes.addFlashAttribute("username", updateRequestDTO.getUsername());
+        attributes.addFlashAttribute("userAvatar", updateRequestDTO.getAvatarUrl());
+        attributes.addFlashAttribute("updateSuccess", true);
+
         return "redirect:/";
     }
 
     @GetMapping("/logout")
-    public String logoutPost(Model model, SessionStatus status){
-        userService.logoutUser(model.getAttribute("apiKey").toString());
+    public String logoutPost(Model model, SessionStatus status, RedirectAttributes attributes){
+        Boolean success = userService.logoutUser(model.getAttribute("apiKey").toString());
+        if (success) {
+            attributes.addFlashAttribute("logoutSuccess", true);
+        }
         status.setComplete();
         return "redirect:/login";
     }
