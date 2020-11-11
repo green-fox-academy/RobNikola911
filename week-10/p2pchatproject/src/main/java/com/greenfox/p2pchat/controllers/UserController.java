@@ -2,6 +2,7 @@ package com.greenfox.p2pchat.controllers;
 
 import com.greenfox.p2pchat.dto.UpdateRequestDTO;
 import com.greenfox.p2pchat.dto.UserRequestDTO;
+import com.greenfox.p2pchat.models.Message;
 import com.greenfox.p2pchat.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class UserController {
 
     private final UserService userService;
+
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
@@ -36,13 +38,13 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String registerPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO,
+    public String registerPost( @ModelAttribute UserRequestDTO userRequestDTO,
                                RedirectAttributes attributes){
-        userService.registerUser(userRequestDTO);
+        Object user = userService.registerUser(userRequestDTO);
 
-        if(userService.registerUser(userRequestDTO) != null) {
+        if(user != null) {
             attributes.addFlashAttribute("registrationSuccess", true);
-            return "login";
+            return "redirect:/login";
         }
         attributes.addFlashAttribute("registrationFail", true);
         return "register";
@@ -57,9 +59,10 @@ public class UserController {
     public String loginPost(Model model, @ModelAttribute UserRequestDTO userRequestDTO,
                             RedirectAttributes attributes){
 
-        if (userService.loginUser(userRequestDTO) == null) {
+        Object user = userService.loginUser(userRequestDTO);
+        if (user == null) {
             attributes.addFlashAttribute("loginFailed", true);
-            return "login";
+            return "redirect:/login";
         }
 
         model.addAttribute("apiKey", userService.loginUser(userRequestDTO));
@@ -97,4 +100,15 @@ public class UserController {
         status.setComplete();
         return "redirect:/login";
     }
+
+    @PostMapping("/postMessage")
+    public String postMessage(Model model, @RequestParam String message,
+                              RedirectAttributes attributes) {
+        Message messageObj = userService.postMessage(model.getAttribute("apiKey").toString(), message);
+        attributes.addFlashAttribute("username", messageObj.getAuthor().getUsername());
+        attributes.addFlashAttribute("userAvatar", messageObj.getAuthor().getAvatarurl());
+        return "redirect:/";
+
+    }
+
 }

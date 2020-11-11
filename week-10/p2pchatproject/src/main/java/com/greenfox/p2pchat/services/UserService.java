@@ -56,18 +56,14 @@ public class UserService {
         HttpHeaders headers = new HttpHeaders();
         headers.set("apiKey", apiKey);
         HttpEntity<UpdateRequestDTO> request = new HttpEntity<>(updateRequestDTO, headers);
-    //   HttpHeaders httpHeaders = new HttpHeaders();
-     //   httpHeaders.set("apiKey", apiKey);
-     //   request.getHeaders().add("apiKey", apiKey);
 
         //RESPONSE
-        ResponseEntity<UpdateResponseDTO> response;
-   //     try {
-            response = restTemplate
+        try {
+            ResponseEntity<UpdateResponseDTO> response = restTemplate
                     .exchange(System.getenv("UPDATE_URL"), HttpMethod.POST, request, UpdateResponseDTO.class);
-   //     } catch (Exception exception){
-            UpdateResponseDTO responseBody = response.getBody();
-    //    }
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     public Boolean logoutUser(String apiKey) {
@@ -96,6 +92,21 @@ public class UserService {
         try {
             ResponseEntity<GetMessagesResponseDTO> response = restTemplate.exchange(url, HttpMethod.POST, request, GetMessagesResponseDTO.class);
             return response.getBody().getMessages();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public Message postMessage(String apiKey, String message) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = System.getenv("BASEURL") + "/api/message/";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("apiKey", apiKey);
+        HttpEntity<PostMessageRequestDTO> request = new HttpEntity<>(new PostMessageRequestDTO(null, null, message), headers);
+        try {
+            ResponseEntity<Message> response = restTemplate.exchange(url, HttpMethod.POST, request, Message.class);
+            return response.getBody();
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return null;
