@@ -42,7 +42,7 @@
 
 <div>
     <ul th:each="message: ${messages}" id="message-box">
-        <img th:src="@{${message.getAuthor().getAvatarurl()}}" alt="User Avatar" class="user-avatar"
+        <img th:src="@{${message.getAuthor().getAvatarUrl()}}" alt="User Avatar" class="user-avatar"
              title="Click here to update profile">
         <li th:text="${message.getAuthor().getUsername()} + ' - ' + ${message.getCreated()}" id="content"></li>
         <br>
@@ -50,6 +50,10 @@
 
     </ul>
 </div>
+<a th:href="@{/createChannel}"><img src="https://findicons.com/files/icons/1722/gnome_2_18_icon_theme/24/stock_channel_green.png"
+                             alt="create channel" id="channel" title="Log Out"></a>
+<p th:if="${createSuccess}" th:text="'Create channel successful! With name ' + ${channelname}" th:style="|color:red|">channel
+    successful! Hello</p>
 
 </body>
 </html>

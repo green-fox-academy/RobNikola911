@@ -1,5 +1,6 @@
 package com.greenfox.p2pchat.controllers;
 
+import com.greenfox.p2pchat.dto.CreateChannelDTO;
 import com.greenfox.p2pchat.dto.UpdateRequestDTO;
 import com.greenfox.p2pchat.dto.UserRequestDTO;
 import com.greenfox.p2pchat.models.Message;
@@ -27,7 +28,8 @@ public class UserController {
         if (model.getAttribute("apiKey") == null) {
             return "redirect:/login";
         }
-        model.addAttribute("messages", userService.getMessages(model.getAttribute("apiKey").toString(), 20));
+        model.addAttribute("messages",
+                userService.getMessages(model.getAttribute("apiKey").toString(), 5));
         return "index";
     }
 
@@ -106,9 +108,37 @@ public class UserController {
                               RedirectAttributes attributes) {
         Message messageObj = userService.postMessage(model.getAttribute("apiKey").toString(), message);
         attributes.addFlashAttribute("username", messageObj.getAuthor().getUsername());
-        attributes.addFlashAttribute("userAvatar", messageObj.getAuthor().getAvatarurl());
+        attributes.addFlashAttribute("userAvatar", messageObj.getAuthor().getAvatarUrl());
         return "redirect:/";
 
+    }
+
+    @GetMapping("/createChannel")
+    public String getChannel(Model model) {
+        if (model.getAttribute("apiKey") == null) {
+            return "login";
+        }
+        return "channel";
+    }
+
+    @PostMapping("/createChannel")
+    public String createChannel(Model model, @ModelAttribute CreateChannelDTO createChannelDTO,
+                                RedirectAttributes attributes) {
+        userService.createChannel(createChannelDTO, model.getAttribute("apiKey").toString());
+        attributes.addFlashAttribute("channelname", createChannelDTO.getName());
+        attributes.addFlashAttribute("createSuccess", true);
+        return "redirect:/user-channels";
+
+    }
+
+    @GetMapping("/user-channels")
+    public String getMyChannels(Model model) {
+        if (model.getAttribute("apiKey") == null) {
+            return "login";
+        }
+        model.addAttribute("channels",
+                userService.getChannels(model.getAttribute("apiKey").toString()));
+        return "channel";
     }
 
 }

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="/styles-update.css" />
+</head>
+<body>
+
+<div id="sign-up-window">
+    <div id="sign-up-form">
+        <form th:action="@{/createChannel}" method="post">
+
+            <p id="form-title">Create channel</p>
+            <br>
+            <label for="name">Channel name</label>
+            <input type="text" id="name" name="name" placeholder="New channel name" maxlength="50" required>
+            <br>
+            <label for="chdescription">Description</label>
+            <input type="text" id="chdescription" name="description" placeholder="Description...">
+
+            <button type="submit" id="form-button">Create channel</button>
+
+        </form>
+        <a href="/">Back</a>
+    </div>
+
+    <div>
+        <ul th:each="channel: ${channels}" id="message-box">
+            <li th:text="${channel.getId()}"></li>
+            <li th:text="${channel.getName()}"></li>
+            <li th:text="${channel.getDescription()}"></li>
+            <li th:text="${channel.getAdmin()}"></li>
+        </ul>
+    </div>
+</div>
+</body>

@@ -13,9 +13,11 @@ public class UserResponseDTO {
 
     private Long userId;
     private String username;
+    private String avatarurl;
 
-    public UserResponseDTO(Long userId, String username) {
+    public UserResponseDTO(Long userId, String username, String avatarurl) {
         this.userId = userId;
         this.username = username;
+        this.avatarurl = avatarurl;
     }
 }

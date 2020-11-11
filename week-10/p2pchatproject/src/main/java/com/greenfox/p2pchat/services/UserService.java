@@ -1,6 +1,7 @@
 package com.greenfox.p2pchat.services;
 
 import com.greenfox.p2pchat.dto.*;
+import com.greenfox.p2pchat.models.Channel;
 import com.greenfox.p2pchat.models.Message;
 import com.greenfox.p2pchat.models.User;
 import org.springframework.http.HttpEntity;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -88,9 +90,15 @@ public class UserService {
         String url = System.getenv("BASEURL") + "/api/channel/get-messages";
         HttpHeaders headers = new HttpHeaders();
         headers.set("apiKey", apiKey);
-        HttpEntity<GetMessagesRequestDTO> request = new HttpEntity<>(new GetMessagesRequestDTO(null, null, count), headers);
+
+        //REQUEST
+        HttpEntity<GetMessagesRequestDTO> request =
+                new HttpEntity<>(new GetMessagesRequestDTO(null, null, count), headers);
+
+        //RESPONSE
         try {
-            ResponseEntity<GetMessagesResponseDTO> response = restTemplate.exchange(url, HttpMethod.POST, request, GetMessagesResponseDTO.class);
+            ResponseEntity<GetMessagesResponseDTO> response =
+                    restTemplate.exchange(url, HttpMethod.POST, request, GetMessagesResponseDTO.class);
             return response.getBody().getMessages();
         } catch(Exception e) {
             System.out.println(e.getMessage());
@@ -107,6 +115,44 @@ public class UserService {
         try {
             ResponseEntity<Message> response = restTemplate.exchange(url, HttpMethod.POST, request, Message.class);
             return response.getBody();
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public void createChannel(CreateChannelDTO createChannelDTO, String apiKey) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = System.getenv("BASEURL") + "/api/channel/";
+        //REQUEST
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("apiKey", apiKey);
+        HttpEntity<CreateChannelDTO> request = new HttpEntity<>(createChannelDTO, headers);
+
+        //RESPONSE
+        try {
+            ResponseEntity<Channel> response = restTemplate
+                    .exchange(url, HttpMethod.POST, request, Channel.class);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public Channel[] getChannels(String apiKey) {
+        RestTemplate restTemplate = new RestTemplate();
+        String url = System.getenv("BASEURL") + "/api/channel/user-channels";
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("apiKey", apiKey);
+
+        //REQUEST
+        HttpEntity<String> request = new HttpEntity<>(headers);
+
+        //RESPONSE
+        try {
+            ResponseEntity<GetChannelResponseDTO> response =
+                    restTemplate.exchange(url, HttpMethod.GET, request, GetChannelResponseDTO.class);
+            return response.getBody().getChannels();
         } catch(Exception e) {
             System.out.println(e.getMessage());
             return null;
