@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>URL Aliaser</title>
+</head>
+<body>
+
+<h2>URL Aliaser</h2>
+
+<div class="container">
+    <p th:text="${message}" style="color: green"></p>
+    <p th:text="${error}" style="color: red"></p>
+
+
+    <form action="/save-link" method="post" th:object="${link}">
+        <label for="url">url</label>
+        <input id="url" th:field="*{url}">
+        <label for="alias">alias</label>
+        <input id="alias" th:field="*{alias}">
+        <button>Send</button>
+    </form>
+
+
+</div>
+</body>
+</html>

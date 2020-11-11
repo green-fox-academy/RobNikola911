@@ -3,6 +3,7 @@ package com.greenfox.trialexam.models;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,18 +23,15 @@ public class UrlModel {
     private String url;
     private String alias;
     private int hitCount;
+    @JsonIgnore
     private String secretCode;
 
     public UrlModel(String url, String alias) {
-        Random r = new Random();
         this.url = url;
         this.alias = alias;
-        hitCount ++;
-  //      secretCode = String.format("%04d", r.nextInt(1001));
     }
 
     public UrlModel() {
-        Random r = new Random();
-        this.secretCode = String.format("%04d", r.nextInt(1001));
+
     }
 }

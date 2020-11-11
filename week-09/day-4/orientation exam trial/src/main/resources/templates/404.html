@@ -2,10 +2,10 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8" />
-    <title>URL aliaser</title>
+    <title>404</title>
 </head>
 <body>
-<h1> URL aliaser</h1>
+<h1> 404</h1>
 <!--<div th:if="${url}">-->
 <div th:if="${aliastaken}">
     <p th:text="'Your alias is already in use!'" th:style="|color:red|"></p>
@@ -22,7 +22,7 @@
 
 
         <form action='/save-link' method="post">
-            
+
             <label for="url">URL</label>
             <input type="text" id="url" name="url" required>
             <br>
@@ -33,7 +33,7 @@
 
         </form>
 
-<!--        <p>Not registered yet? <a href="/create-account">Click here to create your account</a></p>-->
+        <!--        <p>Not registered yet? <a href="/create-account">Click here to create your account</a></p>-->
     </div>
 </div>
 
