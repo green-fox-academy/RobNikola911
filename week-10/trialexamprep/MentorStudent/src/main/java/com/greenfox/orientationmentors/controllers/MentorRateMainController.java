@@ -7,6 +7,7 @@ import com.greenfox.orientationmentors.models.Mentor;
 import com.greenfox.orientationmentors.services.ClassNameService;
 import com.greenfox.orientationmentors.services.MentorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -81,10 +82,24 @@ public class MentorRateMainController {
             if (mentors.size() != 0) {
                 return ResponseEntity.status(200).body(classNameService.listMentorsNames(mentors));
             } else {
-                return ResponseEntity.status(404).build();
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
         } else {
-            return ResponseEntity.status(400).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
+    }
+
+    @PutMapping("/api/mentors/{mentorId}")
+    @ResponseBody
+    public ResponseEntity<Object> updateMentor(@PathVariable Long mentorId, @RequestBody MentorDTO mentorDTO) {
+        mentorService.updateMentor(mentorId, mentorDTO);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/api/mentors/{mentorId}")
+    @ResponseBody
+    public ResponseEntity<Object> deleteMentor(@PathVariable Long mentorId) {
+        mentorService.deleteMentor(mentorId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

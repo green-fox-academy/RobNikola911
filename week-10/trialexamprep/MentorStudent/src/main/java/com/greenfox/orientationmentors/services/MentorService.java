@@ -14,4 +14,8 @@ public interface MentorService {
     Long saveNewMentorWithClassNameAndGetItsId(MentorDTO mentor);
 
     Optional<Mentor> findMentorById(Long id);
+
+    void deleteMentor(Long id);
+
+    void updateMentor(Long mentorId, MentorDTO mentorDTO);
 }

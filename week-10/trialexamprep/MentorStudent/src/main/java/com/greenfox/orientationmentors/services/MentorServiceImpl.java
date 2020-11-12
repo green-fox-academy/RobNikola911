@@ -1,5 +1,6 @@
 package com.greenfox.orientationmentors.services;
 
+import com.greenfox.orientationmentors.exceptions.LinkNotFoundException;
 import com.greenfox.orientationmentors.models.ClassName;
 import com.greenfox.orientationmentors.models.DTOs.MentorDTO;
 import com.greenfox.orientationmentors.models.Mentor;
@@ -37,6 +38,25 @@ public class MentorServiceImpl implements MentorService {
     public Optional<Mentor> findMentorById(Long id) {
         return mentorRepository.findById(id);
     }
+
+    @Override
+    public void deleteMentor(Long id) {
+        Mentor mentor = mentorRepository.findById(id).orElseThrow(LinkNotFoundException::new);
+        mentorRepository.deleteById(id);
+    }
+
+    @Override
+    public void updateMentor(Long mentorId, MentorDTO mentorDTO) {
+        Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(LinkNotFoundException::new);
+
+        if(!mentor.getName().equals(mentorDTO.getName()) || !mentor.getClassName().getName().equals(mentorDTO.getClassName())) {
+        mentorRepository.save(mentor);
+        } else {
+            throw new LinkNotFoundException();
+        }
+
+    }
+
 
     @Override
     public Long saveNewMentorWithClassNameAndGetItsId(MentorDTO mentor) {

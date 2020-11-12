@@ -2,12 +2,14 @@ package com.greenfox.orientationmentors.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@NoArgsConstructor
 @Getter
 @Setter
 @Entity
@@ -25,12 +27,12 @@ public class ClassName {
     @OneToMany
     private List<Mentor> mentors;
 
-    public ClassName() {
-        this.mentors = new ArrayList<>();
-    }
+//    public ClassName() {
+//        this.mentors = new ArrayList<>();
+//    }
 
     public ClassName(String name) {
-        this();
+//        this();
         this.name = name;
     }
 
