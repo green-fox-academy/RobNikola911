@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class MentorServiceImpl implements MentorService {
@@ -69,6 +70,21 @@ public class MentorServiceImpl implements MentorService {
         }
     }
 
+    @Override
+    public List<MentorDTO> getAllMentorsNamesInClass(String className) {
+        Long id = classNameRepository.findClassIdByClassName(className);
+
+        var mentors = mentorRepository.findAll();
+
+        List<MentorDTO> mentorDtoList = mentors.stream()
+                .map(mentor -> new MentorDTO(mentor))
+                .collect(Collectors.toList());
+
+        List<MentorDTO> list = mentorDtoList.stream()
+                .filter(mentorDto1 -> mentorDto1.getClasName().getId() == id)
+                .collect(Collectors.toList());
+        return list;
+    }
 
     @Override
     public Long saveNewMentorWithClassNameAndGetItsId(MentorDTO mentor) {

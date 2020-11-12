@@ -21,4 +21,6 @@ public interface MentorService {
     void updateMentor(Long mentorId, MentorUpdateDTO mentorUpdateDTO);
 
     Mentor getMentorByID(Long mentorId);
+
+    List<MentorDTO> getAllMentorsNamesInClass(String className);
 }

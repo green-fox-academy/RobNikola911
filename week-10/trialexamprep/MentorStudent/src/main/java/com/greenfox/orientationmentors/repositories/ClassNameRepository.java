@@ -1,6 +1,7 @@
 package com.greenfox.orientationmentors.repositories;
 
 import com.greenfox.orientationmentors.models.ClassName;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,7 @@ public interface ClassNameRepository extends CrudRepository<ClassName, Long> {
     Optional<ClassName> findByName(String className);
 
     Boolean existsClassByName(String className);
+
+    @Query(value = "SELECT id FROM class_names where name=?",nativeQuery = true)
+    Long findClassIdByClassName(String className);
 }

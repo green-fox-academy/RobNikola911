@@ -75,19 +75,9 @@ public class MentorRateMainController {
     }
 
     @GetMapping("/api/mentors")
-    @ResponseBody
-    public ResponseEntity<List<NameDTO>> listMentorsToClassName(@RequestParam String className) {
-        Optional<ClassName> inputClass = classNameService.findClassByName(className);
-        if (inputClass.isPresent()) {
-            List<Mentor> mentors = inputClass.get().getMentors();
-            if (mentors.size() != 0) {
-                return ResponseEntity.status(200).body(classNameService.listMentorsNames(mentors));
-            } else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            }
-        } else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
+    @ResponseBody   //needs finish
+    public ResponseEntity<List<MentorDTO>> listMentorsToClassName(@RequestParam String className) {
+        return ResponseEntity.ok().body(mentorService.getAllMentorsNamesInClass(className));
     }
 
     @PutMapping("/api/mentors/{mentorId}")
