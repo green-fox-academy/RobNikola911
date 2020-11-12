@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,500,700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet" type="text/css">
+    <title>Rate My Mentor</title>
+</head>
+<body>
+<h1>Welcome to RateMyMentor!</h1>
+<h2>Give feedback for...</h2>
+<ul th:each="mentor : ${mentors}">
+    <li><a th:text="${mentor.name}" th:href="'/mentor/' + ${mentor.id}"></a></li>
+</ul>
+<h2>Can't see your mentors on the list? Add them below!</h2>
+<form action="/mentor" method="post">
+    <div>
+        <label for="name">Name</label>
+    </div>
+    <div>
+        <input type="text" id="name" name="name">
+    </div>
+    <div>
+        <label for="class-name">Class</label>
+    </div>
+<!--    <div>-->
+<!--        <select id="class-name" name="className">-->
+<!--            <option th:each="classname : ${schoolClasses}" th:text="${classname.name}"></option>-->
+<!--        </select>-->
+<!--    </div>-->
+    <div th:each="classname : ${schoolClasses}">
+            <input type="radio" id="class-name" name="className"  th:text="${classname.name}" th:value="${classname.name}"><br>
+    </div>
+    <div>
+        <input type="Submit" value="Submit">
+    </div>
+</form>
+</body>
+</html>

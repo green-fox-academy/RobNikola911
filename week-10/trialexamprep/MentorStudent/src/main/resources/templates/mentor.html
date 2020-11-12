@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:100,500,700&display=swap" rel="stylesheet">
+    <link th:href="@{/styles.css}" rel="stylesheet" type="text/css">
+    <title>Rate My Mentor</title>
+</head>
+<body>
+<h1>RateMyMentor</h1>
+<h2 th:text="'Name: ' + ${mentor.name}"></h2>
+<h2 th:text="'Class: ' + ${mentor.className.name}"></h2>
+<a href="/">Back</a>
+</body>
+</html>
