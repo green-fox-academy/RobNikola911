@@ -15,4 +15,6 @@ public interface ClassNameService {
     Optional<ClassName> findClassByName(String className);
 
     List<NameDTO> listMentorsNames(List<Mentor> mentors);
+
+    Boolean isClassExist(String className);
 }

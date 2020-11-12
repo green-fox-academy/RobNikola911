@@ -1,6 +1,7 @@
 package com.greenfox.orientationmentors.services;
 
 import com.greenfox.orientationmentors.models.DTOs.MentorDTO;
+import com.greenfox.orientationmentors.models.DTOs.MentorUpdateDTO;
 import com.greenfox.orientationmentors.models.Mentor;
 
 import java.util.List;
@@ -17,5 +18,7 @@ public interface MentorService {
 
     void deleteMentor(Long id);
 
-    void updateMentor(Long mentorId, MentorDTO mentorDTO);
+    void updateMentor(Long mentorId, MentorUpdateDTO mentorUpdateDTO);
+
+    Mentor getMentorByID(Long mentorId);
 }

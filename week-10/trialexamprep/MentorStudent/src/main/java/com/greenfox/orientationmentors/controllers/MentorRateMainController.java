@@ -2,6 +2,7 @@ package com.greenfox.orientationmentors.controllers;
 
 import com.greenfox.orientationmentors.models.ClassName;
 import com.greenfox.orientationmentors.models.DTOs.MentorDTO;
+import com.greenfox.orientationmentors.models.DTOs.MentorUpdateDTO;
 import com.greenfox.orientationmentors.models.DTOs.NameDTO;
 import com.greenfox.orientationmentors.models.Mentor;
 import com.greenfox.orientationmentors.services.ClassNameService;
@@ -91,9 +92,17 @@ public class MentorRateMainController {
 
     @PutMapping("/api/mentors/{mentorId}")
     @ResponseBody
-    public ResponseEntity<Object> updateMentor(@PathVariable Long mentorId, @RequestBody MentorDTO mentorDTO) {
-        mentorService.updateMentor(mentorId, mentorDTO);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<Object> updateMentor(@PathVariable Long mentorId, @RequestBody MentorUpdateDTO mentorUpdateDTO) {
+        Mentor mentor = mentorService.getMentorByID(mentorId);
+        Boolean isClassNameExist = classNameService.isClassExist(mentorUpdateDTO.getClassName());
+        if (mentor == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        } else if (isClassNameExist) {
+            mentorService.updateMentor(mentorId, mentorUpdateDTO);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
     }
 
     @DeleteMapping("/api/mentors/{mentorId}")

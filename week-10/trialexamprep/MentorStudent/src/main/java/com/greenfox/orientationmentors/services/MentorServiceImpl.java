@@ -3,6 +3,7 @@ package com.greenfox.orientationmentors.services;
 import com.greenfox.orientationmentors.exceptions.LinkNotFoundException;
 import com.greenfox.orientationmentors.models.ClassName;
 import com.greenfox.orientationmentors.models.DTOs.MentorDTO;
+import com.greenfox.orientationmentors.models.DTOs.MentorUpdateDTO;
 import com.greenfox.orientationmentors.models.Mentor;
 import com.greenfox.orientationmentors.repositories.ClassNameRepository;
 import com.greenfox.orientationmentors.repositories.MentorRepository;
@@ -46,15 +47,26 @@ public class MentorServiceImpl implements MentorService {
     }
 
     @Override
-    public void updateMentor(Long mentorId, MentorDTO mentorDTO) {
-        Mentor mentor = mentorRepository.findById(mentorId).orElseThrow(LinkNotFoundException::new);
+    public void updateMentor(Long mentorId, MentorUpdateDTO mentorUpdateDTO) {
+        Optional<Mentor> optionalMentor = mentorRepository.findById(mentorId);
 
-        if(!mentor.getName().equals(mentorDTO.getName()) || !mentor.getClassName().getName().equals(mentorDTO.getClassName())) {
-        mentorRepository.save(mentor);
-        } else {
-            throw new LinkNotFoundException();
+        if (optionalMentor.isPresent()) {
+            Mentor mentor = optionalMentor.get();
+            mentor.setName(mentorUpdateDTO.getName());
+            mentor.getClassName().setName(mentorUpdateDTO.getClassName());
+            mentorRepository.save(mentor);
         }
+    }
 
+    @Override
+    public Mentor getMentorByID(Long mentorId) {
+        Optional<Mentor> optionalMentor = mentorRepository.findById(mentorId);
+        if (optionalMentor.isPresent()) {
+            Mentor mentor = optionalMentor.get();
+            return mentor;
+        } else {
+            return null;
+        }
     }
 
 

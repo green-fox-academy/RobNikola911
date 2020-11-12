@@ -39,4 +39,9 @@ public class ClassNameServiceImpl implements ClassNameService {
         }
         return names;
     }
+
+    @Override
+    public Boolean isClassExist(String className) {
+        return classNameRepository.existsClassByName(className);
+    }
 }

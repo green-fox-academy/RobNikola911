@@ -13,4 +13,6 @@ public interface ClassNameRepository extends CrudRepository<ClassName, Long> {
     List<ClassName> findAll();
 
     Optional<ClassName> findByName(String className);
+
+    Boolean existsClassByName(String className);
 }
