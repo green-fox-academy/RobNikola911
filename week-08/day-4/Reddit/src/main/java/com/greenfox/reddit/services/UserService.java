@@ -10,4 +10,6 @@ public interface UserService {
     boolean checkUser(String name, String password);
     void saveUser(User user);
     List<User> findAllUsers();
+
+    User getUser(String username);
 }

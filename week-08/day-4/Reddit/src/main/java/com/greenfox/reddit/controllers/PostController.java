@@ -22,7 +22,9 @@ public class PostController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @RequestParam(value = "user", required = false) Long userId) {
+        if(userId == null) return "redirect:/login";
+
         model.addAttribute("posts", postService.pageablePostByLikeCounter(0));
         model.addAttribute("currentPage", 0);
         model.addAttribute("pages", postService.maxPage());
@@ -78,7 +80,13 @@ public class PostController {
 
     @PostMapping("/login")
     public String loginUser(String username, String password) {
-        List<User> listOfUsers = userService.findAllUsers();
+        User user = userService.getUser(username);
+        if(user != null) {
+            return "redirect:/?user="+user.getId_user();
+
+
+    }
+   //     List<User> listOfUsers = userService.findAllUsers();
         if (userService.checkUser(username, password)) {
             return "redirect:/";
         } else {

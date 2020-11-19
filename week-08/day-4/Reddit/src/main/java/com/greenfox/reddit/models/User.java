@@ -17,6 +17,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_user;
+    @Column(unique=true, length = 50)
     private String username;
     private String password;
     private boolean voted;
