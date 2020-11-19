@@ -16,16 +16,13 @@ public class Log {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
 //    @CreationTimestamp
 //    @Temporal(TemporalType.DATE)
     @Column
 //    private Date creation;
     private Instant creation;
-
     @Column
     private String endpoint;
-
     @Column
     private String data;
 

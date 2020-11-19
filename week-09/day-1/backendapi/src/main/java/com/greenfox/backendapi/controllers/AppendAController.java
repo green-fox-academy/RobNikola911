@@ -22,7 +22,7 @@ public class AppendAController {
     public Object append(@PathVariable() String appendable) {
         logService.save(new Log("/appenda/"+appendable, appendable));
         if (appendable != null) {
-            AppendA append = new AppendA(appendable.concat("a"));
+            AppendA append = new AppendA(appendable);
         return ResponseEntity.ok().body(append);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
