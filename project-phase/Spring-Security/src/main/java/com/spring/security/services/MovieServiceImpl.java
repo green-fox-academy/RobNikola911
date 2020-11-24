@@ -1,25 +1,30 @@
 package com.spring.security.services;
 
-import com.spring.security.DTOs.GetMovieDTO;
-import com.spring.security.models.MovieResults;
+import com.spring.security.DTOs.MovieDTO;
+import com.spring.security.DTOs.MovieResultDTO;
+import com.spring.security.exceptions.NotFoundException;
+import com.spring.security.mappings.MovieMapper;
+import com.spring.security.models.Movie;
 import com.spring.security.repositories.MovieRepository;
 import okhttp3.OkHttpClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import retrofit2.Call;
-import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MovieServiceImpl {
 
     private MovieRepository movieRepository;
+    private MovieMapper movieMapper;
+
+    MovieAPIService movieAPIService;
 
     @Autowired
     public MovieServiceImpl(MovieRepository movieRepository) {
@@ -37,24 +42,50 @@ public class MovieServiceImpl {
             .client(httpClient.build())
             .build();
 
-    public MovieResults getMoviesByCategory(String category, String apiKey, String language, int page) throws IOException {
+    public List<Movie> getMoviesByCategory(String category, String apiKey, String language, int page) throws IOException {
 
         MovieAPIService movieAPIService = retrofit.create(MovieAPIService.class);
 
-        Call<MovieResults> call = movieAPIService.listOfMovies(category, apiKey, language, page);
+        Call<MovieResultDTO> call = movieAPIService.listOfMovies(category, apiKey, language, page);
 
-        Response<MovieResults> resultsResponse = call.execute();
-        return resultsResponse.body();
+        Response<MovieResultDTO> resultsResponse = call.execute();
+
+        Movie movie = new Movie();
+        if (resultsResponse.body() == null){
+            throw new NotFoundException.LinkNotFoundException();
+        }
+        List<MovieResultDTO.ResultsDTO> resultList =movie.getMovies(resultsResponse.body());
+        List<Movie> movieList = resultList.stream().map(result -> new Movie(result)).collect(Collectors.toList());
+        Boolean movieExists = movieRepository.existsById(movie.getId());
+        for (Movie movie1: movieList) {
+            if(resultsResponse.isSuccessful() && !movieExists) {
+                movieRepository.save(movie1);
+            }
+        }
+
+        return movieList;
+
     }
 
-    public GetMovieDTO getMovieById(Integer movieId, String apiKey) throws IOException {
+    public Movie getMovieById(Integer movieId, String apiKey) throws IOException {
         MovieAPIService movieAPIService = retrofit.create(MovieAPIService.class);
 
-        Call<GetMovieDTO> call = movieAPIService.getMovie(movieId, apiKey);
+        Call<MovieDTO> call = movieAPIService.getMovie(movieId, apiKey);
 
-        Response<GetMovieDTO> resultsResponse = call.execute();
-        return resultsResponse.body();
+        Response<MovieDTO> resultsResponse = call.execute();
+        if (resultsResponse.body() == null){
+            throw new NotFoundException.LinkNotFoundException();
+        }
+        Movie movie = new Movie(resultsResponse.body());
+
+        boolean movieExist = movieRepository.existsById(movieId);
+
+        if (resultsResponse.isSuccessful() && !movieExist) {
+                movieRepository.save(movie);
+        }
+        return movie;
     }
+}
 
 /*    public GetMovieDTO getMovie(Integer movieId , String apiKey) throws IOException {
         MovieAPIService movieAPIService = retrofit.create(MovieAPIService.class);
@@ -96,4 +127,4 @@ public class MovieServiceImpl {
         return listOfMovies(category, apiKey, language, page);
     }*/
 
-}
+
