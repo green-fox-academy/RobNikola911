@@ -32,6 +32,25 @@ public class JwtUtil {
 
     private Claims extractAllClaims(String token){
             return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
+
+            /*        public User parseToken(String token) {
+            try {
+                Claims body = Jwts.parser()
+                        .setSigningKey(secret)
+                        .parseClaimsJws(token)
+                        .getBody();
+
+                User u = new User();
+                u.setUsername(body.getSubject());
+                u.setId(Long.parseLong((String) body.get("userId")));
+                u.setRole((String) body.get("role"));
+
+                return u;
+
+            } catch (JwtException | ClassCastException e) {
+                return null;
+            }
+        }*/
     }
 
     private Boolean isTokenExpired(String token){
