@@ -22,13 +22,15 @@ import java.util.stream.Collectors;
 public class MovieServiceImpl {
 
     private MovieRepository movieRepository;
-    private MovieMapper movieMapper;
+
+    private final MovieMapper movieMapper;
 
     MovieAPIService movieAPIService;
 
     @Autowired
-    public MovieServiceImpl(MovieRepository movieRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
+        this.movieMapper = movieMapper;
     }
 
     public static String BASE_URL = "https://api.themoviedb.org/3/";
@@ -54,10 +56,12 @@ public class MovieServiceImpl {
         if (resultsResponse.body() == null){
             throw new NotFoundException.LinkNotFoundException();
         }
-        List<MovieResultDTO.ResultsDTO> resultList =movie.getMovies(resultsResponse.body());
-        List<Movie> movieList = resultList.stream().map(result -> new Movie(result)).collect(Collectors.toList());
-        Boolean movieExists = movieRepository.existsById(movie.getId());
+        List<MovieResultDTO.ResultsDTO> resultList = movie.getMovies(resultsResponse.body());
+        List<Movie> movieList = resultList.stream().map(movieMapper::map)
+                .collect(Collectors.toList());
+
         for (Movie movie1: movieList) {
+            Boolean movieExists = movieRepository.existsByTitle(movie1.getTitle());
             if(resultsResponse.isSuccessful() && !movieExists) {
                 movieRepository.save(movie1);
             }

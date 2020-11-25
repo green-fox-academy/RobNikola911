@@ -42,21 +42,21 @@ public class Movie {
 
     public List<MovieResultDTO.ResultsDTO> getMovies(MovieResultDTO movieResultDTO) {
         var list = movieResultDTO.getResults();
-        List<MovieResultDTO.ResultsDTO> movieList = new ArrayList<>();
-        for (MovieResultDTO.ResultsDTO result : list) {
-            this.id = result.getId();
-            this.title = result.getTitle();
-            this.vote_average = result.getVote_average();
-            this.popularity = result.getPopularity();
-            movieList.add(result);
-        }
-        return movieList;
+ //       List<MovieResultDTO.ResultsDTO> movieList = new ArrayList<>();
+//        for (MovieResultDTO.ResultsDTO result : list) {
+//            this.id = result.getId();
+//            this.title = result.getTitle();
+//            this.vote_average = result.getVote_average();
+//            this.popularity = result.getPopularity();
+//            movieList.add(result);
+//        }
+        return new ArrayList<>(list);
     }
 
-    public Movie(MovieResultDTO.ResultsDTO result) {
-        this.id = result.getId();
-        this.title = result.getTitle();
-        this.vote_average = result.getVote_average();
-        this.popularity = result.getPopularity();
-    }
+//    public Movie(MovieResultDTO.ResultsDTO result) {
+//        this.id = result.getId();
+//        this.title = result.getTitle();
+//        this.vote_average = result.getVote_average();
+//        this.popularity = result.getPopularity();
+//    }
 }

@@ -1,11 +1,14 @@
 package com.spring.security.filters;
 
 import com.spring.security.configuration.JwtUtil;
+import com.spring.security.exceptions.JwtTokenMissingException;
 import com.spring.security.services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -34,6 +37,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     String username = null;
     String jwt = null;
 
+//    if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
+//            throw new JwtTokenMissingException();
+//        }
     if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")){
         jwt = authorizationHeader.substring(7);
         username = jwtUtil.extractUsername(jwt);

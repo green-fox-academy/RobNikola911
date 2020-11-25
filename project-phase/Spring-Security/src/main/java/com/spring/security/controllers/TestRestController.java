@@ -7,6 +7,7 @@ import com.spring.security.models.AuthenticationResponse;
 import com.spring.security.models.Movie;
 import com.spring.security.services.MovieServiceImpl;
 import com.spring.security.services.MyUserDetailsService;
+import com.spring.security.services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,13 +26,19 @@ public class TestRestController {
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailsService userDetailsService;
     private final JwtUtil jwtTokenUtil;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public TestRestController(MovieServiceImpl movieService, AuthenticationManager authenticationManager, MyUserDetailsService userDetailsService, JwtUtil jwtTokenUtil) {
+    public TestRestController(MovieServiceImpl movieService,
+                              AuthenticationManager authenticationManager,
+                              MyUserDetailsService userDetailsService,
+                              JwtUtil jwtTokenUtil,
+                              UserServiceImpl userService) {
         this.movieService = movieService;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtTokenUtil = jwtTokenUtil;
+        this.userService = userService;
     }
 
     @GetMapping("movies/{category}")
@@ -71,7 +78,6 @@ public class TestRestController {
 
     @PostMapping("/register")
     public ResponseEntity<?> registerUser(@RequestBody RegisterRequestDto registerRequestDto) throws Exception{
-
-
+        return userService.registerUser(registerRequestDto);
     }
 }
