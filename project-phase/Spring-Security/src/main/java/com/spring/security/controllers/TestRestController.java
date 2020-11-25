@@ -1,5 +1,6 @@
 package com.spring.security.controllers;
 
+import com.spring.security.DTOs.RegisterRequestDto;
 import com.spring.security.configuration.JwtUtil;
 import com.spring.security.models.AuthenticationRequest;
 import com.spring.security.models.AuthenticationResponse;
@@ -61,11 +62,16 @@ public class TestRestController {
             throw new Exception("Incorrect username or password", e);
         }
 
-        final UserDetails userDetails = userDetailsService
-                .loadUserByUsername(authenticationRequest.getUsername());
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
 
         final String jwt = jwtTokenUtil.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<?> registerUser(@RequestBody RegisterRequestDto registerRequestDto) throws Exception{
+
+
     }
 }
