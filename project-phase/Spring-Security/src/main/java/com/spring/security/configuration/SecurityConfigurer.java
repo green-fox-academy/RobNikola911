@@ -75,19 +75,9 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter implements 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException, ServletException {
-        response.addHeader("WWW-Authenticate", "No idea");
-        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        PrintWriter writer = response.getWriter();
-        writer.println("HTTP Status 401");
+//        response.addHeader("WWW-Authenticate", "No idea");
+//        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+//        PrintWriter writer = response.getWriter();
+//        writer.println("HTTP Status 401");
     }
-
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-//        auth.inMemoryAuthentication()
-//                .withUser("usernamee")
-//                .password(encoder.encode("password"))
-//                .roles("USER");
-//    }
-
 }
