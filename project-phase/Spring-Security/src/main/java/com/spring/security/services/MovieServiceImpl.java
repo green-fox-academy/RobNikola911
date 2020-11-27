@@ -2,6 +2,7 @@ package com.spring.security.services;
 
 import com.spring.security.DTOs.MovieDTO;
 import com.spring.security.DTOs.MovieResultDTO;
+import com.spring.security.exceptions.MovieAlreadyExistsException;
 import com.spring.security.exceptions.NotFoundException;
 import com.spring.security.mappings.MovieMapper;
 import com.spring.security.models.Movie;
@@ -25,8 +26,6 @@ public class MovieServiceImpl {
 
     private final MovieMapper movieMapper;
 
-    MovieAPIService movieAPIService;
-
     @Autowired
     public MovieServiceImpl(MovieRepository movieRepository, MovieMapper movieMapper) {
         this.movieRepository = movieRepository;
@@ -34,8 +33,6 @@ public class MovieServiceImpl {
     }
 
     public static String BASE_URL = "https://api.themoviedb.org/3/";
-
-
 
     OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
     Retrofit retrofit = new Retrofit.Builder()
@@ -89,6 +86,22 @@ public class MovieServiceImpl {
         }
         return movie;
     }
+
+    public Movie saveMovie(Movie movie) throws MovieAlreadyExistsException {
+        if(movieRepository.existsById(movie.getId())){
+            throw new MovieAlreadyExistsException("Movie already Exists do not add Second Time");
+        }
+        Movie savedMovie = movieRepository.save(movie);
+        if(savedMovie == null){
+            throw new MovieAlreadyExistsException("Movie already Exists");
+        }
+        return savedMovie;
+    }
+
+    public List<Movie> getAllMovies() {
+        return movieRepository.findAll();
+    }
+
 }
 
 /*    public GetMovieDTO getMovie(Integer movieId , String apiKey) throws IOException {
