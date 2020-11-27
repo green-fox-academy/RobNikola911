@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class MovieServiceImpl {
+public class MovieServiceImpl implements MovieService {
 
     private MovieRepository movieRepository;
 
@@ -41,6 +41,7 @@ public class MovieServiceImpl {
             .client(httpClient.build())
             .build();
 
+    @Override
     public List<Movie> getMoviesByCategory(String category, String apiKey, String language, int page) throws IOException {
 
         MovieAPIService movieAPIService = retrofit.create(MovieAPIService.class);
@@ -68,6 +69,7 @@ public class MovieServiceImpl {
 
     }
 
+    @Override
     public Movie getMovieById(Integer movieId, String apiKey) throws IOException {
         MovieAPIService movieAPIService = retrofit.create(MovieAPIService.class);
 
@@ -87,6 +89,7 @@ public class MovieServiceImpl {
         return movie;
     }
 
+    @Override
     public Movie saveMovie(Movie movie) throws MovieAlreadyExistsException {
         if(movieRepository.existsById(movie.getId())){
             throw new MovieAlreadyExistsException("Movie already Exists do not add Second Time");
@@ -95,6 +98,7 @@ public class MovieServiceImpl {
         return savedMovie;
     }
 
+    @Override
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }

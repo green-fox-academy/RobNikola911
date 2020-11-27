@@ -31,10 +31,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        if (request.getServletPath().startsWith("/register")) {
+        if (request.getRequestURI().startsWith("/register")) {
             filterChain.doFilter(request, response);
             return;
-        } else if (request.getServletPath().startsWith("/authenticate")) {
+        } else if (request.getRequestURI().startsWith("/authenticate")) {
             filterChain.doFilter(request, response);
             return;
         }

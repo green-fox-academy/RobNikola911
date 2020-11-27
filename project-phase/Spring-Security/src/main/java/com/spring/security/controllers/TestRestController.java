@@ -5,9 +5,7 @@ import com.spring.security.configuration.JwtUtil;
 import com.spring.security.models.AuthenticationRequest;
 import com.spring.security.models.AuthenticationResponse;
 import com.spring.security.models.Movie;
-import com.spring.security.services.MovieServiceImpl;
-import com.spring.security.services.MyUserDetailsService;
-import com.spring.security.services.UserServiceImpl;
+import com.spring.security.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,18 +20,18 @@ import java.util.List;
 @RestController
 public class TestRestController {
 
-    private final MovieServiceImpl movieService;
+    private final MovieService movieService;
     private final AuthenticationManager authenticationManager;
     private final MyUserDetailsService userDetailsService;
     private final JwtUtil jwtTokenUtil;
-    private final UserServiceImpl userService;
+    private final UserService userService;
 
     @Autowired
-    public TestRestController(MovieServiceImpl movieService,
+    public TestRestController(MovieService movieService,
                               AuthenticationManager authenticationManager,
                               MyUserDetailsService userDetailsService,
                               JwtUtil jwtTokenUtil,
-                              UserServiceImpl userService) {
+                              UserService userService) {
         this.movieService = movieService;
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;

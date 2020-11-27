@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -19,6 +19,7 @@ public class UserServiceImpl {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
+    @Override
     public ResponseEntity<Object> registerUser(RegisterRequestDto registerRequestDto) {
 
         Boolean existsUser = userRepository.existsByUsername(registerRequestDto.getUsername());

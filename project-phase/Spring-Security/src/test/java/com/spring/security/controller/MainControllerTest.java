@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spring.security.controllers.TestRestController;
 import com.spring.security.models.Movie;
 import com.spring.security.repositories.MovieRepository;
+import com.spring.security.services.MovieService;
 import com.spring.security.services.MovieServiceImpl;
 import com.spring.security.services.UserServiceImpl;
 import org.junit.Assert;
@@ -11,9 +12,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -37,34 +41,25 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @EnableWebMvc
+@AutoConfigureMockMvc
 public class MainControllerTest {
 
     @Autowired
-    WebApplicationContext context;
-
     private MockMvc mockMvc;
 
     private String jwt;
-    private Movie movie, movie1;
+    private Movie movie;
 
     @Autowired
     UserServiceImpl userService;
 
-    @Autowired
-    MovieServiceImpl movieService;
-
-    @Autowired
-    MovieRepository movieRepository;
+    private final MovieService movieService = Mockito.mock(MovieService.class);
 
     @InjectMocks
     private TestRestController testRestController;
 
     @BeforeEach
     public void doBefore() throws Exception {
-        mockMvc =  MockMvcBuilders
-                .webAppContextSetup(context)
-                .apply(springSecurity())
-                .build();
 
         mockMvc.perform(post("/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -86,24 +81,18 @@ public class MainControllerTest {
     @Test
     public void getMovieByIdTest() throws Exception {
         MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(testRestController).build();
-        movie = new Movie();
-        movie.setId(5000);
-        movie.setTitle("Sabyasachi");
-        movieRepository.save(movie);
 
-        when(movieService.getMovieById(5000, "asd")).thenReturn(movie);
-        mockMvc.perform(MockMvcRequestBuilders.get("/movie/5000")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
+        movie = new Movie();
+        movie.setId(3);
+        movie.setTitle("Sabyasachi");
+
+        when(movieService.getMovieById(3, "4d3e40f1f028b2d983ba6cd281aee20e")).thenReturn(movie);
+        mockMvc = MockMvcBuilders.standaloneSetup(testRestController).build();
+        mockMvc.perform(MockMvcRequestBuilders.get("/movie/3?api_key=4d3e40f1f028b2d983ba6cd281aee20e")
+                .header("Authorization", "Bearer " + jwt)
+                .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andDo(MockMvcResultHandlers.print());
-
-//        MvcResult result = mockMvc.perform(get("/movie/5000")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .header("Bearer "+jwt)
-//                .content("{\"username\": \"rob\",\"password\": \"asd\"}"))
-//                .andExpect(status().isOk()).andReturn();
-
     }
 
 
