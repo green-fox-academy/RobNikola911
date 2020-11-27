@@ -1,79 +1,113 @@
 package com.spring.security.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.spring.security.SecurityApplication;
+import com.spring.security.controllers.TestRestController;
 import com.spring.security.models.Movie;
+import com.spring.security.repositories.MovieRepository;
 import com.spring.security.services.MovieServiceImpl;
+import com.spring.security.services.UserServiceImpl;
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = SecurityApplication.class)
-@WebMvcTest
+@SpringBootTest
+@EnableWebMvc
 public class MainControllerTest {
 
     @Autowired
+    WebApplicationContext context;
+
     private MockMvc mockMvc;
 
+    private String jwt;
     private Movie movie, movie1;
 
-    @MockBean
-    private MovieServiceImpl movieService;
+    @Autowired
+    UserServiceImpl userService;
+
+    @Autowired
+    MovieServiceImpl movieService;
+
+    @Autowired
+    MovieRepository movieRepository;
 
     @InjectMocks
-    private MainControllerTest mainController;
-
-    private List<Movie> list = null;
+    private TestRestController testRestController;
 
     @BeforeEach
-    public void setUp() {
-        MockitoAnnotations.openMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(mainController).build();
-        movie = new Movie();
-        movie1 = new Movie();
-        movie.setTitle("Sabyasachi");
-        movie.setStatus("Released");
-        list = new ArrayList();
-        list.add(movie);
-        movie1.setTitle("Sabya");
-        movie1.setStatus("Upcoming");
-        list.add(movie1);
+    public void doBefore() throws Exception {
+        mockMvc =  MockMvcBuilders
+                .webAppContextSetup(context)
+                .apply(springSecurity())
+                .build();
+
+        mockMvc.perform(post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"rob\",\"password\": \"asd\"}"))
+                .andExpect(status().isOk());
+
+        MvcResult result = mockMvc.perform(post("/authenticate")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\": \"rob\",\"password\": \"asd\"}"))
+                .andExpect(status().isOk()).andReturn();
+        this.jwt = result.getResponse().getContentAsString();
     }
 
     @Test
-    public void saveMovieTest() throws Exception {
-        when(movieService.saveMovie(any())).thenReturn(movie);
-        mockMvc.perform(get("movie/1")
-                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
-                .andExpect(MockMvcResultMatchers.status().isCreated())
-                .andDo(MockMvcResultHandlers.print());
+    public void authenticatetestCase() throws Exception {
+        Assert.assertNotNull(jwt);
     }
 
-//    @Test
+    @Test
+    public void getMovieByIdTest() throws Exception {
+        MockitoAnnotations.openMocks(this);
+        mockMvc = MockMvcBuilders.standaloneSetup(testRestController).build();
+        movie = new Movie();
+        movie.setId(5000);
+        movie.setTitle("Sabyasachi");
+        movieRepository.save(movie);
+
+        when(movieService.getMovieById(5000, "asd")).thenReturn(movie);
+        mockMvc.perform(MockMvcRequestBuilders.get("/movie/5000")
+                .contentType(MediaType.APPLICATION_JSON).content(asJsonString(movie)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andDo(MockMvcResultHandlers.print());
+
+//        MvcResult result = mockMvc.perform(get("/movie/5000")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .header("Bearer "+jwt)
+//                .content("{\"username\": \"rob\",\"password\": \"asd\"}"))
+//                .andExpect(status().isOk()).andReturn();
+
+    }
+
+
+    //    @Test
 //    public void getAllUserTest() throws Exception {
 //        when(trackService.getAllTracks()).thenReturn(list);
 //        mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/tracks")
@@ -103,7 +137,6 @@ public class MainControllerTest {
     private static String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

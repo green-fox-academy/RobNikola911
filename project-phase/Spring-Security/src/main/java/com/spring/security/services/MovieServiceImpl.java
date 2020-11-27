@@ -92,9 +92,6 @@ public class MovieServiceImpl {
             throw new MovieAlreadyExistsException("Movie already Exists do not add Second Time");
         }
         Movie savedMovie = movieRepository.save(movie);
-        if(savedMovie == null){
-            throw new MovieAlreadyExistsException("Movie already Exists");
-        }
         return savedMovie;
     }
 
